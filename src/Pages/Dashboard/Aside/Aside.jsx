@@ -33,7 +33,7 @@ const Aside = () => {
 
       {/* ASIDE AREA */}
       <aside className={`
-          fixed lg:static top-0 left-0 h-full w-64 bg-lime-400 text-white p-6 flex flex-col justify-between 
+          fixed lg:static top-0 left-0 h-full w-64 bg-lime-500 text-white p-6 flex flex-col justify-between 
           transform transition-transform duration-300 
           ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
