@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Addrequest = () => {
   const { user } = use(AuthContext);
   const [upazilas, setUpazilas] = useState([]);
   const [districts, setDistricts] = useState([]);
+
+  const axiosSecure =useAxiosSecure()
+
   const {
     register,
     handleSubmit,
@@ -55,10 +59,10 @@ const Addrequest = () => {
       status:"panding"
     }
 
-    await axios.post("http://localhost:5000/request",formData)
+    await axiosSecure.post("/request",formData)
     .then(res =>{
         console.log(res.data);
-        toast.success("Your Request Successfull")
+        alert("Your Request Successfull")
     })
     .then(error =>{
         console.log(error)

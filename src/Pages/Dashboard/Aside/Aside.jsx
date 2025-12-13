@@ -1,9 +1,10 @@
 import { Outlet, NavLink, useNavigate } from "react-router";
-import { AiFillHome, AiFillDashboard, AiOutlineUser, AiOutlineAppstore, AiOutlineSetting, AiOutlineLogout, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { AiFillHome, AiFillDashboard,AiOutlineAppstore, AiOutlineSetting, AiOutlineLogout, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { use, useState } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 import { toast } from "react-toastify";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { FaUserNurse } from "react-icons/fa";
 
 const Aside = () => {
 
@@ -85,7 +86,7 @@ const Aside = () => {
 
             {/* Users */}
             <NavLink
-              to="/Dashboard/Users"
+              to="/Dashboard/All-user"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
@@ -93,8 +94,8 @@ const Aside = () => {
                 }`
               }
             >
-              <AiOutlineUser size={20} />
-              <span>Users</span>
+              <FaUserNurse size={20} />
+              <span>All Users</span>
             </NavLink>
 
             {/* Products */}
