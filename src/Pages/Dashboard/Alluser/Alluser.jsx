@@ -1,10 +1,11 @@
-import React, {  useEffect, useState } from 'react';
+import React, {  use, useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { AuthContext } from '../../../Context/AuthContext';
 
 const Alluser = () => {
     const axiosSecure =useAxiosSecure();
     const [users,setUsers]=useState([]);
-    
+    const {loading}=use(AuthContext)
     useEffect(()=>{
         axiosSecure.get("/All-user")
         .then(res=>{
@@ -15,13 +16,13 @@ const Alluser = () => {
         })
     },[axiosSecure])
 
-    console.log(users);
+    
 
 
     return (
         <div>
             
-        <div class="max-w-6xl mx-auto p-6">
+        <div class="lg:max-w-6xl  mx-auto p-6">
   <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title text-xl mb-4">All Users</h2>
@@ -48,7 +49,7 @@ const Alluser = () => {
               <td>{index+1}</td>
               <td>
                 <div class="avatar">
-                  <div class="w-10 rounded-full">
+                  <div class="lg:w-10 rounded-full">
                     <img src={user?.image} alt="avatar" />
                   </div>
                 </div>

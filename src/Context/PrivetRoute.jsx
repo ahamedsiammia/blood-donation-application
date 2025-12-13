@@ -3,11 +3,11 @@ import { AuthContext } from './AuthContext';
 import { Navigate, useLocation } from 'react-router';
 
 const PrivetRoute = ({children}) => {
-    const {user,loading}=use(AuthContext);
+    const {user,loading,roleLoading}=use(AuthContext);
 
     const location =useLocation();
 
-    if(loading){
+    if(loading || roleLoading){
         return <p>loading...</p>
     }
 

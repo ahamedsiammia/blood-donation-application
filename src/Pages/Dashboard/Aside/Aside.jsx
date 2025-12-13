@@ -8,7 +8,7 @@ import { FaUserNurse } from "react-icons/fa";
 
 const Aside = () => {
 
-    const {LogOut}=use(AuthContext);
+    const {LogOut,role}=use(AuthContext);
     const navigate =useNavigate()
     const [open, setOpen] = useState(false);
 
@@ -71,7 +71,8 @@ const Aside = () => {
             </NavLink>
 
             {/* Add Product */}
-            <NavLink
+           {
+            role == "doner" &&  <NavLink
               to="/Dashboard/Add-request"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
@@ -84,8 +85,10 @@ const Aside = () => {
               <span>Add Request</span>
             </NavLink>
 
+           }
             {/* Users */}
-            <NavLink
+            {
+              role == "admin" && <NavLink
               to="/Dashboard/All-user"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
@@ -97,6 +100,7 @@ const Aside = () => {
               <FaUserNurse size={20} />
               <span>All Users</span>
             </NavLink>
+            }
 
             {/* Products */}
             <NavLink
