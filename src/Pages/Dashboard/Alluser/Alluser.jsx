@@ -6,17 +6,28 @@ const Alluser = () => {
     const axiosSecure =useAxiosSecure();
     const [users,setUsers]=useState([]);
     const {loading}=use(AuthContext)
-    useEffect(()=>{
-        axiosSecure.get("/All-user")
+
+    const fetchUser =()=>{
+         axiosSecure.get("/All-user")
         .then(res=>{
             setUsers(res.data)
         })
         .catch(error =>{
             console.log(error);
         })
-    },[axiosSecure])
+    }
 
-    
+    useEffect(()=>{
+       fetchUser()
+    },[])
+
+    const handleChangeStatus =(email,status)=>{
+        axiosSecure.patch(`/update/status?email=${email}&status=${status}`)
+        .then(res =>{
+            console.log(res.data);
+            fetchUser()
+        })
+    }
 
 
     return (
@@ -60,9 +71,18 @@ const Alluser = () => {
               <td>
                 <span class="badge badge-success">{user?.status}</span>
               </td>
-              <td>
-                <button class="btn btn-sm btn-error">Block</button>
+
+              {
+                user?.status == "active" ? <td>
+                <button onClick={()=>handleChangeStatus(user?.email,"blocked")} class="btn btn-sm btn-error">Blocked</button>
+              </td>: <td>
+                <button onClick={()=>handleChangeStatus(user?.email,"active")} class="btn btn-sm btn-ghost">Unblock</button>
               </td>
+              }
+             
+              
+              
+              
             </tr>
                 ))
             }

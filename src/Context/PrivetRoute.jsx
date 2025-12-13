@@ -3,7 +3,7 @@ import { AuthContext } from './AuthContext';
 import { Navigate, useLocation } from 'react-router';
 
 const PrivetRoute = ({children}) => {
-    const {user,loading,roleLoading}=use(AuthContext);
+    const {user,loading,roleLoading,status}=use(AuthContext);
 
     const location =useLocation();
 
@@ -11,11 +11,11 @@ const PrivetRoute = ({children}) => {
         return <p>loading...</p>
     }
 
-    if(user){
-        return children
+    if(!user || !status == "active"){
+        <Navigate state={location.pathname} to="/Login" ></Navigate>
     }
 
-    return <Navigate state={location.pathname} to="/Login" ></Navigate>
+    return children
 };
 
 export default PrivetRoute;

@@ -12,7 +12,7 @@ const AuthProvider = ({children}) => {
     const [loading,setLoading]=useState(true);
     const [role,setRole]=useState("");
     const [roleLoading,setRoleLoading]=useState(true);
-    const [status ,setStatus]=useState("");
+    const [status ,setStatus]=useState(" ");
 
 
 //    Google Login 
@@ -69,7 +69,8 @@ const Login =(email,password)=>{
         Creatuser,
         Login,
         role,
-        roleLoading
+        roleLoading,
+        status
     }
 
     return <AuthContext value={authData}>{children}</AuthContext>
