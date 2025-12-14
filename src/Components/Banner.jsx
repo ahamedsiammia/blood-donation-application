@@ -5,6 +5,9 @@ const videos = [
   "https://cdn.dribbble.com/userupload/44360845/file/4988e26dadf995df34b5bfde3d04d45d.mp4",
   "https://cdn.dribbble.com/userupload/44953456/file/76723a83e127562547a28df5001d257b.webm",
   "https://cdn.dribbble.com/userupload/16569515/file/original-d99071d642c8efd87400222a0c344e1a.mp4",
+  // "https://cdn.dribbble.com/userupload/21900375/file/original-a1899c875a24d409e6331be7dfbd93c2.gif",
+  // "https://cdn.dribbble.com/userupload/9547295/file/original-421f0eea24e721703495e55dd3c90da5.mp4",
+  // "https://cdn.dribbble.com/userupload/39295694/file/original-f47f421d3bf08ed2057d0152dc6f460c.gif",
 ];
 
 const Banner = () => {

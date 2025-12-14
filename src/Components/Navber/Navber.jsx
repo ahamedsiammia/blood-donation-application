@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
-import { FaPaw } from 'react-icons/fa';
 import { AuthContext } from '../../Context/AuthContext';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
+import { BiLogOutCircle, BiSolidDonateBlood } from 'react-icons/bi';
+import { LuLayoutDashboard } from 'react-icons/lu';
 
 const Navbar = () => {
     const { user, LogOut } =useContext(AuthContext)
@@ -33,11 +34,12 @@ const Navbar = () => {
 
     }
     return (
-        <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5  shadow-sm">
+      <div className='shadow-lg'>
+          <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
             {/* <div className=''>{user && user.email}</div> */}
-            <div className="flex items-center gap-2 mb-3">
-                <FaPaw className="text-3xl text-yellow-400" />
-                <h2 className="text-2xl text-orange-900 font-bold tracking-wide">PawMart</h2>
+            <div className="flex items-center gap-1 mb-3 ">
+                <BiSolidDonateBlood size={40} color='red' />
+                <h2 className="text-2xl text-orange-500 font-bold tracking-wide">Blood Donation</h2>
             </div>
             <div className="nav flex flex-col md:flex-row gap-5 items-center">
                 <NavLink to="/" className={({ isActive }) => isActive ?
@@ -55,6 +57,20 @@ const Navbar = () => {
             </div>
 
             <div className='flex justify-center items-center gap-4'>
+                <div className="flex items-center gap-2">
+                                        <span >
+                                            <MdOutlineLightMode size={24} />
+                                        </span>
+                                        <input
+                                            onChange={(e) => handleTheme(e.target.checked)}
+                                            type="checkbox"
+                                            defaultChecked={localStorage.getItem('theme') === "dark"}
+                                            className="toggle"
+                                        />
+                                        <span>
+                                            <MdDarkMode size={24} />
+                                        </span>
+                                    </div>
                 {
                     user ? (
                         <div className="dropdown dropdown-end">
@@ -78,7 +94,7 @@ const Navbar = () => {
                                     {/* <span className="font-semibold">
                                         {user.displayName || user.email}
                                     </span> */}
-                                    <Link to={"/Dashboard"} className='text-lg' >Dashboard</Link>
+                                    <Link to={"/Dashboard"} className='text-lg' > <span><LuLayoutDashboard /></span> Dashboard</Link>
                                 </li>
                                 {/* update profile */}
 
@@ -87,24 +103,9 @@ const Navbar = () => {
                                         <Link to='/myprofile'>Update Profile</Link>
                                     </span>
                                 </li> */}
+                                
                                 <li>
-                                    <div className="flex items-center gap-2">
-                                        <span >
-                                            <MdOutlineLightMode size={24} />
-                                        </span>
-                                        <input
-                                            onChange={(e) => handleTheme(e.target.checked)}
-                                            type="checkbox"
-                                            defaultChecked={localStorage.getItem('theme') === "dark"}
-                                            className="toggle"
-                                        />
-                                        <span>
-                                            <MdDarkMode size={24} />
-                                        </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <button onClick={handleLogout} className='text-lg'>Logout</button>
+                                    <button onClick={handleLogout} className='text-lg'> <span><BiLogOutCircle /></span> Logout</button>
                                 </li>
                             </ul>
 
@@ -125,6 +126,7 @@ const Navbar = () => {
 
             </div>
         </div>
+      </div>
     );
 };
 

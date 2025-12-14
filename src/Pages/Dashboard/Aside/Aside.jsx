@@ -1,10 +1,11 @@
 import { Outlet, NavLink, useNavigate } from "react-router";
-import { AiFillHome, AiFillDashboard,AiOutlineAppstore, AiOutlineSetting, AiOutlineLogout, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { AiFillHome, AiFillDashboard, AiOutlineSetting, AiOutlineLogout, AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { use, useState } from "react";
 import { AuthContext } from "../../../Context/AuthContext";
 import { toast } from "react-toastify";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { FaUserNurse } from "react-icons/fa";
+import { GiAnatomy } from "react-icons/gi";
 
 const Aside = () => {
 
@@ -70,9 +71,9 @@ const Aside = () => {
               <span>Main Dashboard</span>
             </NavLink>
 
-            {/* Add Product */}
+            {/* Add request */}
            {
-            role == "doner" &&  <NavLink
+            role == "donor" &&  <NavLink
               to="/Dashboard/Add-request"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
@@ -102,9 +103,9 @@ const Aside = () => {
             </NavLink>
             }
 
-            {/* Products */}
+            {/* My Request */}
             <NavLink
-              to="/Dashboard/Products"
+              to="/Dashboard/My-request"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
@@ -112,8 +113,8 @@ const Aside = () => {
                 }`
               }
             >
-              <AiOutlineAppstore size={20} />
-              <span>Products</span>
+              <GiAnatomy size={20} />
+              <span>My Request</span>
             </NavLink>
 
             {/* Settings */}

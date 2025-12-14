@@ -43,6 +43,7 @@ const Addrequest = () => {
       requesterEmail,
       requesterName, 
     } = data;
+    
 
     const formData ={
         requestMessage,
@@ -58,6 +59,7 @@ const Addrequest = () => {
       requesterName,
       status:"panding"
     }
+
 
     await axiosSecure.post("/request",formData)
     .then(res =>{
@@ -90,6 +92,7 @@ const Addrequest = () => {
               <input
                 type="text"
                 readOnly
+                value={user?.displayName || ""}
                 placeholder={user?.displayName}
                 className="w-full p-2 rounded-lg border"
                 {...register("requesterName")}
@@ -102,6 +105,7 @@ const Addrequest = () => {
               <input
                 type="email"
                 readOnly
+                value={user?.email || ""}
                 placeholder={user?.email}
                 className="w-full p-2 rounded-lg border"
                 {...register("requesterEmail")}
