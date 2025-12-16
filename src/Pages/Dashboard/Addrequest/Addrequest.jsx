@@ -4,13 +4,14 @@ import { AuthContext } from "../../../Context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Addrequest = () => {
   const { user } = use(AuthContext);
   const [upazilas, setUpazilas] = useState([]);
   const [districts, setDistricts] = useState([]);
 
-  const axiosSecure =useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -41,12 +42,11 @@ const Addrequest = () => {
       district,
       recipientName,
       requesterEmail,
-      requesterName, 
+      requesterName,
     } = data;
-    
 
-    const formData ={
-        requestMessage,
+    const formData = {
+      requestMessage,
       donationTime,
       donationDate,
       blood,
@@ -57,21 +57,32 @@ const Addrequest = () => {
       recipientName,
       requesterEmail,
       requesterName,
-      status:"panding"
-    }
+      status: "panding",
+    };
 
-
-    await axiosSecure.post("/request",formData)
-    .then(res =>{
+    await axiosSecure
+      .post("/request", formData)
+      .then((res) => {
         console.log(res.data);
-        alert("Your Request Successfull")
-    })
-    .then(error =>{
-        console.log(error)
-        toast.error("Your Request Not Successfull")
-    })
 
-
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Request Add Successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .then((error) => {
+        console.log(error);
+        // Swal.fire({
+        //   position:"top-end",
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: "Your request not successfull !",
+        //   footer: '<a href="#">Why do I have this issue?</a>',
+        // });
+      });
 
     console.log(data);
     reset();
@@ -132,7 +143,7 @@ const Addrequest = () => {
             <label className="block font-medium">District</label>
             <select
               defaultValue={"Select Your District"}
-              className="select w-full p-2 rounded-lg border-black"
+              className="select w-full p-2 rounded-lg border-white"
               {...register("district")}
             >
               <option disabled={true}>Select Your District</option>
@@ -147,7 +158,7 @@ const Addrequest = () => {
             <label className="block font-medium">Upazila</label>
             <select
               defaultValue={"Select Your Upazila"}
-              className="select w-full p-2 rounded-lg border-black"
+              className="select w-full p-2 rounded-lg border-white"
               {...register("upazila")}
             >
               <option disabled={true}>Select Your Upazila</option>
@@ -189,7 +200,7 @@ const Addrequest = () => {
               </label>
               <select
                 defaultValue={"Select Blood Group"}
-                className="select w-full p-2 rounded-lg border-black"
+                className="select w-full p-2 rounded-lg border-white"
                 {...register("blood")}
               >
                 <option disabled={true}>Select Blood Group</option>

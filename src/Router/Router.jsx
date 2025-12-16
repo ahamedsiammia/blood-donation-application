@@ -9,6 +9,7 @@ import Addrequest from "../Pages/Dashboard/Addrequest/Addrequest";
 import Alluser from "../Pages/Dashboard/Alluser/Alluser";
 import PrivetRoute from "../Context/PrivetRoute";
 import Myrequest from "../Pages/Dashboard/Myrequest/Myrequest";
+import Profile from "../Pages/Dashboard/Profile/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path:"My-request",
         Component: Myrequest
+      },
+      {
+        path:"profile",
+        Component:Profile
       }
     ]
   }

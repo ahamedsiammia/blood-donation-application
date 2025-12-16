@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { FaUserNurse } from "react-icons/fa";
 import { GiAnatomy } from "react-icons/gi";
+import { CgProfile } from "react-icons/cg";
 
 const Aside = () => {
 
@@ -117,6 +118,20 @@ const Aside = () => {
               <span>My Request</span>
             </NavLink>
 
+              {/* profile */}
+            <NavLink
+              to="/Dashboard/profile"
+               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
+                  isActive ? "bg-yellow-600" : ""
+                }`
+              }
+            >
+              <CgProfile  size={20} />
+              <span>Profile</span>
+            </NavLink>
+
             {/* Settings */}
             <NavLink
               to="/Dashboard/Settings"
@@ -130,8 +145,11 @@ const Aside = () => {
               <AiOutlineSetting size={20} />
               <span>Settings</span>
             </NavLink>
+
           </nav>
         </div>
+
+         
 
         {/* LOGOUT BUTTON */}
         <button onClick={handleLogout} className="flex items-center gap-3 p-3 rounded-lg hover:bg-red-600 transition">
