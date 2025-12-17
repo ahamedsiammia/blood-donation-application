@@ -4,7 +4,6 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
-import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const Profile = () => {
@@ -67,6 +66,7 @@ const Profile = () => {
       updateProfile(user,{
         displayName:name,photoURL:image,upazila:upazila,district:district,blood:blood
       })
+      console.log(res);
        fetchUser()
        setIsEditing(false)
         Swal.fire({

@@ -36,14 +36,17 @@ const Navbar = () => {
     return (
       <div className='shadow-lg'>
           <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
-            {/* <div className=''>{user && user.email}</div> */}
             <div className="flex items-center gap-1 mb-3 ">
                 <BiSolidDonateBlood size={40} color='red' />
-                <h2 className="text-2xl text-orange-500 font-bold tracking-wide">Blood Donation</h2>
+                <h2 className="text-2xl text-orange-500 font-bold tracking-wide"><span className='text-red-600'>Blood</span> Donation</h2>
             </div>
             <div className="nav flex flex-col md:flex-row gap-5 items-center">
                 <NavLink to="/" className={({ isActive }) => isActive ?
                     "text-orange-700 underline" : ""}>Home</NavLink>
+
+                    {/* donation request  */}
+                <NavLink to="/donation-request" className={({ isActive }) => isActive ?
+                    "text-orange-700 underline" : ""}>Donation Request</NavLink>
 
                 {
                     user && (
@@ -53,6 +56,8 @@ const Navbar = () => {
                         </>
                     )
                 }
+                <NavLink to="/funding" className={({ isActive }) => isActive ?
+                    "text-orange-700 underline" : ""}>Funding</NavLink>
 
             </div>
 

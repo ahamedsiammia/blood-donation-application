@@ -10,6 +10,10 @@ import Alluser from "../Pages/Dashboard/Alluser/Alluser";
 import PrivetRoute from "../Context/PrivetRoute";
 import Myrequest from "../Pages/Dashboard/Myrequest/Myrequest";
 import Profile from "../Pages/Dashboard/Profile/Profile";
+import Allrequest from "../Pages/Dashboard/Allrequest/Allrequest";
+import Funding from "../Pages/Funding/Funding";
+import DonationRequest from "../Pages/DonationRequest/DonationRequest";
+import DonationDetails from "../Pages/DonationDetails/DonationDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +31,20 @@ export const router = createBrowserRouter([
         {
             path:"/register",
             Component: Register
+        },
+        {
+          path:"/funding",
+          Component: Funding
+        },
+        {
+          path:"/donation-request",
+          Component: DonationRequest
+        },
+        {
+          path:"/donation-details/:id",
+          element: <PrivetRoute>
+            <DonationDetails></DonationDetails>
+          </PrivetRoute>
         }
     ]
   },
@@ -53,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path:"profile",
         Component:Profile
+      },
+      {
+        path:"All-request",
+        Component:Allrequest
       }
     ]
   }

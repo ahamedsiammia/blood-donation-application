@@ -7,6 +7,7 @@ import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { FaUserNurse } from "react-icons/fa";
 import { GiAnatomy } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
+import { BiDonateBlood } from "react-icons/bi";
 
 const Aside = () => {
 
@@ -36,7 +37,7 @@ const Aside = () => {
 
       {/* ASIDE AREA */}
       <aside className={`
-          fixed lg:static top-0 left-0 h-full w-64 bg-lime-500 text-white p-6 flex flex-col justify-between 
+          fixed lg:static top-0 z-30 left-0 h-full w-64 bg-lime-500 text-white p-6 flex flex-col justify-between 
           transform transition-transform duration-300 
           ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
@@ -114,9 +115,24 @@ const Aside = () => {
                 }`
               }
             >
-              <GiAnatomy size={20} />
+              <BiDonateBlood size={20} />
               <span>My Request</span>
             </NavLink>
+
+            {/* all request */}
+            <NavLink
+              to="/Dashboard/All-request"
+               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
+                  isActive ? "bg-purple-600" : ""
+                }`
+              }
+            >
+              <GiAnatomy size={20} />
+              <span>All Request</span>
+            </NavLink>
+
 
               {/* profile */}
             <NavLink

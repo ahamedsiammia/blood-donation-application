@@ -1,85 +1,60 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
-
-const videos = [
-  "https://cdn.dribbble.com/userupload/44360845/file/4988e26dadf995df34b5bfde3d04d45d.mp4",
-  "https://cdn.dribbble.com/userupload/44953456/file/76723a83e127562547a28df5001d257b.webm",
-  "https://cdn.dribbble.com/userupload/16569515/file/original-d99071d642c8efd87400222a0c344e1a.mp4",
-  // "https://cdn.dribbble.com/userupload/21900375/file/original-a1899c875a24d409e6331be7dfbd93c2.gif",
-  // "https://cdn.dribbble.com/userupload/9547295/file/original-421f0eea24e721703495e55dd3c90da5.mp4",
-  // "https://cdn.dribbble.com/userupload/39295694/file/original-f47f421d3bf08ed2057d0152dc6f460c.gif",
-];
+import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
-  const [current, setCurrent] = useState(0);
-
-  // Auto-play the carousel every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % videos.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const prevSlide = () =>
-    setCurrent((current - 1 + videos.length) % videos.length);
-  const nextSlide = () => setCurrent((current + 1) % videos.length);
-
   return (
-    <>
-    <div className="absolute w-full flex top-0 left-0 justify-center">
-      <div className="max-w-7xl mx-auto ">
-        <div className="relative  w-full overflow-hidden bg-black rounded-2xl shadow-2xl">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${current * 100}%)` }}
-          >
-            {videos.map((src, i) => (
-              <div key={i} className="w-full shrink-0 relative">
-                <video
-                  src={src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-[60vh] object-cover brightness-90"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-              </div>
-            ))}
-          </div>
+    <div className="relative">
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        interval={4000}
+      >
+        <div>
+          <img
+            src="https://i.pinimg.com/1200x/ca/55/0c/ca550cc93e5f09dd7b8fe16ba54104f5.jpg"
+            alt="Donate Blood"
+            className="h-[500px] object-cover"
+          />
+        </div>
+        <div>
+          <img
+            src="https://i.pinimg.com/1200x/dc/bc/d2/dcbcd2cb9d71be3761101737d02c2616.jpg"
+            alt="Save Lives"
+            className="h-[500px] object-cover"
+          />
+        </div>
+        <div>
+          <img
+            src="https://i.pinimg.com/1200x/f2/d0/8b/f2d08bfaaa08d87775b014d13a16ba14.jpg"
+            alt="Blood Donation"
+            className="h-[500px] object-cover"
+          />
+        </div>
+      </Carousel>
 
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Dots indicator */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {videos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`h-2 w-2 rounded-full transition-all ${
-                  current === i ? "bg-white w-4" : "bg-white/50"
-                }`}
-              />
-            ))}
+      {/* Overlay Content */}
+      <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center">
+        <div className="max-w-2xl px-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Donate blood, save lives
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-6">
+            Your blood is precious: Donate, save a life, make a difference.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-6 py-3 rounded-2xl bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition">
+              Join as Donor
+            </button>
+            <button className="px-6 py-3 rounded-2xl bg-white text-red-600 font-semibold shadow hover:bg-gray-100 transition">
+              Search Donors
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div className="mb-[500px]"></div>
-    </>
   );
 };
 
