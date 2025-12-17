@@ -75,6 +75,7 @@ const Register = () => {
         // post user in database
         axios.post("http://localhost:5000/user",userData)
         .then(res =>{
+          console.log(res);
             toast.success("your log register successfull")
             navigate('/')
         })

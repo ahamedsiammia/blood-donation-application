@@ -8,7 +8,7 @@ const FeatureSection = () => {
         
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-primary mb-4">
+          <h2 className="text-4xl font-bold text-red-500 mb-4">
             Why Choose Our Blood Donation Platform?
           </h2>
           <p className="text-base-content max-w-2xl mx-auto">

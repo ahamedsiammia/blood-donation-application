@@ -1,6 +1,8 @@
+import { Link } from 'lucide-react';
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { NavLink } from 'react-router';
 
 const Banner = () => {
   return (
@@ -45,9 +47,7 @@ const Banner = () => {
             Your blood is precious: Donate, save a life, make a difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 rounded-2xl bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition">
-              Join as Donor
-            </button>
+           <NavLink to={"/Register"}><button className="px-6 py-3 rounded-2xl bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition"> Join as a donor </button></NavLink>
             <button className="px-6 py-3 rounded-2xl bg-white text-red-600 font-semibold shadow hover:bg-gray-100 transition">
               Search Donors
             </button>

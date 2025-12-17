@@ -25,7 +25,7 @@ const Allrequest = () => {
   useEffect(() => {
     fetchRequest()
 
-  }, [axiosSecure, currentPage, itemPerPage]);
+  }, []);
 
   const numberofPages = Math.ceil(totalRequest / itemPerPage);
 

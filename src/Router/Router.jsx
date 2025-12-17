@@ -14,6 +14,8 @@ import Allrequest from "../Pages/Dashboard/Allrequest/Allrequest";
 import Funding from "../Pages/Funding/Funding";
 import DonationRequest from "../Pages/DonationRequest/DonationRequest";
 import DonationDetails from "../Pages/DonationDetails/DonationDetails";
+import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
+import SearchRequest from "../Pages/SearchRequest/SearchRequest";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
         {
           path:"/funding",
           Component: Funding
+        },
+        {
+          path:"/search-request",
+          Component: SearchRequest
+        },
+        {
+          path:"/payment-success",
+          Component: PaymentSuccess
         },
         {
           path:"/donation-request",
