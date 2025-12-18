@@ -148,19 +148,7 @@ const Aside = () => {
               <span>Profile</span>
             </NavLink>
 
-            {/* Settings */}
-            <NavLink
-              to="/Dashboard/Settings"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-yellow-600" : ""
-                }`
-              }
-            >
-              <AiOutlineSetting size={20} />
-              <span>Settings</span>
-            </NavLink>
+
 
           </nav>
         </div>

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import React, {  useEffect, useState } from 'react';
 
 const SearchRequest = () => {
     const [upazila, setUpazila] = useState("");
@@ -8,7 +7,7 @@ const SearchRequest = () => {
   const [upazilas, setUpazilas] = useState([]);
   const [districts, setDistricts] = useState([]);
 
-  const [filterData,setFilterData]=useState([])
+  const [filterData,setFilterData]=useState([]);
 
   useEffect(() => {
     axios.get("/upazilas.json").then((res) => {
@@ -32,7 +31,6 @@ const SearchRequest = () => {
     })
   }
 
-  
  
 
     return (
