@@ -61,7 +61,7 @@ const Aside = () => {
 
             {/* Main Dashboard */}
             <NavLink
-              to="/Dashboard/Main"
+              to="/Dashboard"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${

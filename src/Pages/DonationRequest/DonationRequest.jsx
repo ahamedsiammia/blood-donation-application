@@ -16,7 +16,7 @@ const DonationRequest = () => {
   }, []);
 
   if(pnadingData.length == 0){
-    return   <div className="text-center text-gray-500 mt-10">
+    return   <div className="text-center text-red-500 text-4xl mt-10">
           No requests found.
         </div>
   }
