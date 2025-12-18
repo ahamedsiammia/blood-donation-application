@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const Allrequest = () => {
   const axiosSecure = useAxiosSecure();
   const [allrequest, setAllrequest] = useState([]);
   const [totalRequest, setTotalRequest] = useState(0);
-  const [itemPerPage, setItemPerPage] = useState(10);
+  const [itemPerPage,setItePerPage]=useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedStatus, setSelectedStatus] = useState('');
+
+
+  const handleStatusChange =(event)=>{
+    const value = event.target.value;
+    setSelectedStatus(value);
+      
+    
+  }
+
+console.log(selectedStatus);
 
   const fetchRequest = ()=>{
         axiosSecure
-      .get(`/All-request?page=${currentPage - 1}&size=${itemPerPage}`)
+      .get(`/All-request?page=${currentPage - 1}&size=${itemPerPage}&status=${selectedStatus}`)
       .then((res) => {
         console.log(res.data);
         setAllrequest(res.data.request);
@@ -22,10 +36,11 @@ const Allrequest = () => {
       });
   }
 
-  useEffect(() => {
-    fetchRequest()
 
-  }, []);
+  useEffect(() => {
+
+    fetchRequest()
+  }, [axiosSecure,currentPage ,itemPerPage,]);
 
   const numberofPages = Math.ceil(totalRequest / itemPerPage);
 
@@ -72,17 +87,61 @@ const Allrequest = () => {
     });
   };
 
+ // cenceled
+  const hendleCencel = (id, status) => {
+    axiosSecure
+      .patch(`/cancel-request?id=${id}&status=${status}`)
+      .then((res) => {
+        fetchRequest();
+        toast.success("your request cencel successfull");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Done
+  const hendleDone = (id, status) => {
+    axiosSecure
+      .patch(`/done-request?id=${id}&status=${status}`)
+      .then((res) => {
+        fetchRequest();
+        toast.success("Your request done");
+        console.log(res.data);
+      })
+      .catch((error) => {
+        toast.error("your request not done");
+        console.log(error);
+      });
+  };
 
 
   return (
-    <div>
+   <div>
       <div className="max-w-7xl mx-auto p-6">
         <div className="card bg-base-100 shadow">
           <div className="card-body">
             {/* Page Title */}
             <h2 className="text-2xl font-semibold mb-4">
-              🩸 All Donation Requests
+              🩸 My Donation Requests
             </h2>
+            {/* Filter Section (Static UI Only) */}
+        
+             <div className="text-black">
+              <select
+                value={selectedStatus}
+                onChange={handleStatusChange}
+                className="select  p-2 rounded-lg border-black bg-lime-300"
+                
+              >
+                <option value=" " disabled={true} >Filer with Status</option>
+                <option value="panding">panding</option>
+                <option value="Done">Done</option>
+                <option value="inprogress">inprogress</option>
+                <option value="canceled">canceled</option>
+              </select>
+            </div>
+        
 
             {/* Donation Requests Table */}
             <div className="overflow-x-auto">
@@ -101,6 +160,7 @@ const Allrequest = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  
                   {/* Pending Row */}
                   {allrequest.map((request, index) => (
                     <tr>
@@ -115,20 +175,63 @@ const Allrequest = () => {
                         </span>
                       </td>
                       <td>
-                        <span className="badge badge-info">
+
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
+                            request.status === "panding"
+                              ? "bg-yellow-500"
+                              : request.status === "inprogress"
+                              ? "bg-blue-500"
+                              : request.status === "canceled"
+                              ? "bg-red-500"
+                              : request.status === "done"
+                              ? "bg-green-500"
+                              : "bg-gray-500"
+                          }`}
+                        >
                           {request.status}
                         </span>
                       </td>
-                      <td>-</td>
+                      {request.status === "inprogress" ? (
+                        <>{request.requesterEmail}</>
+                      ) : (
+                        "-"
+                      )}
                       <td className="space-x-1">
-                        <button className="btn btn-xs btn-outline">Edit</button>
-                        <button
-                          onClick={()=>handleDelete(`${request._id}`)}
-                          className="btn btn-xs btn-outline btn-error"
+                        {request.status === "inprogress" && (
+                          <>
+                            <button
+                              onClick={() => hendleDone(request._id, "Done")}
+                              className="btn btn-xs btn-outline"
+                            >
+                              Done
+                            </button>
+                            <button
+                              onClick={() =>
+                                hendleCencel(request._id, "canceled")
+                              }
+                              className="btn btn-xs btn-outline btn-error"
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        )}
+                        
+                        <Link to={`/Dashboard/view-request/${request._id}`} ><button  className="btn btn-xs btn-outline">View</button></Link>
+
+                       {
+                        request.status === "panding" && <> 
+
+
+
+                         <button
+                          onClick={() => handleDelete(request._id)}
+                          className="btn btn-xs btn-outline "
                         >
-                          Delete
+                          <RiDeleteBin6Line size={15} />
                         </button>
-                        <button className="btn btn-xs btn-outline">View</button>
+                        </>
+                       }
                       </td>
                     </tr>
                   ))}
@@ -138,6 +241,10 @@ const Allrequest = () => {
           </div>
         </div>
       </div>
+
+      { 
+        allrequest.length == 0 && <p className="text-4xl text-red-500 font-bold text-center">No Reusest Found</p>
+      }
 
       <div className="flex justify-center mt-12 gap-5">
         <button onClick={handlePre} className="btn">

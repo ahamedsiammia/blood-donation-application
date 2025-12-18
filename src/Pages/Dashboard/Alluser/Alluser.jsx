@@ -8,7 +8,7 @@ const Alluser = () => {
     const fetchUser =()=>{
          axiosSecure.get("/All-user")
         .then(res=>{
-            setUsers(res.data)
+            setUsers(res.data.user)
             console.log(res.data);
         })
         .catch(error =>{
@@ -18,7 +18,7 @@ const Alluser = () => {
 
     useEffect(()=>{
        fetchUser()
-    },[])
+    },[axiosSecure])
 
     const handleChangeStatus =(email,status)=>{
         axiosSecure.patch(`/update/status?email=${email}&status=${status}`)

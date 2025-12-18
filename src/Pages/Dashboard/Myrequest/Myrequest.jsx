@@ -47,7 +47,6 @@ const Myrequest = () => {
   // delete
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -61,6 +60,7 @@ const Myrequest = () => {
         axiosSecure
           .delete(`/Delete-request?id=${id}`)
           .then((res) => {
+            console.log(res.data);
             Swal.fire({
               title: "Deleted!",
               text: "Your Request has been deleted.",
@@ -80,6 +80,7 @@ const Myrequest = () => {
     axiosSecure
       .patch(`/cancel-request?id=${id}&status=${status}`)
       .then((res) => {
+        console.log(res.data);
         fetchRequest();
         toast.success("your request cencel successfull");
       })
@@ -200,7 +201,7 @@ const Myrequest = () => {
                        {
                         request.status === "panding" && <> 
 
-                          <button className="btn btn-xs btn-outline text-green-500">Edit</button>
+                          <Link to={`/Dashboard/edit-request/${request._id}`}><button className="btn btn-xs btn-outline text-green-500">Edit</button></Link>
 
                          <button
                           onClick={() => handleDelete(request._id)}

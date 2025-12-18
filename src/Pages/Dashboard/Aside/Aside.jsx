@@ -106,7 +106,9 @@ const Aside = () => {
             }
 
             {/* My Request */}
-            <NavLink
+            {
+              role == "donor" && 
+              <NavLink
               to="/Dashboard/My-request"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
@@ -118,9 +120,11 @@ const Aside = () => {
               <BiDonateBlood size={20} />
               <span>My Request</span>
             </NavLink>
+            }
 
             {/* all request */}
-            <NavLink
+            {
+              role == "admin" && <NavLink
               to="/Dashboard/All-request"
                onClick={() => setOpen(false)}
               className={({ isActive }) =>
@@ -132,6 +136,22 @@ const Aside = () => {
               <GiAnatomy size={20} />
               <span>All Request</span>
             </NavLink>
+            }
+
+            {
+              role == "volunteer" && <NavLink
+              to="/Dashboard/All-request"
+               onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
+                  isActive ? "bg-purple-600" : ""
+                }`
+              }
+            >
+              <GiAnatomy size={20} />
+              <span>All Request</span>
+            </NavLink>
+            }
 
 
               {/* profile */}

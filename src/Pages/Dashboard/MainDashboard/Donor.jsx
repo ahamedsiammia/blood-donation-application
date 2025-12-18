@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const Donor = () => {
   const axiosSecure =useAxiosSecure()
@@ -39,6 +41,7 @@ const Donor = () => {
           axiosSecure
             .delete(`/Delete-request?id=${id}`)
             .then((res) => {
+              console.log(res);
               Swal.fire({
                 title: "Deleted!",
                 text: "Your Request has been deleted.",
@@ -58,6 +61,7 @@ const Donor = () => {
       axiosSecure
         .patch(`/cancel-request?id=${id}&status=${status}`)
         .then((res) => {
+          console.log(res);
           fetchRequest();
           toast.success("your request cencel successfull");
         })
@@ -89,7 +93,6 @@ const Donor = () => {
             <h2 className="text-2xl font-semibold mb-4">
               🩸 My Donation Requests
             </h2>
-
             {/* Donation Requests Table */}
             <div className="overflow-x-auto">
               <table className="table table-zebra">
@@ -183,6 +186,9 @@ const Donor = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div>
+              <Link to={"/Dashboard/My-request"}><button className='btn bg-lime-500'>My All Donation Request </button></Link>
             </div>
           </div>
         </div>

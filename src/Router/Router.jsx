@@ -17,6 +17,7 @@ import DonationDetails from "../Pages/DonationDetails/DonationDetails";
 import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import SearchRequest from "../Pages/SearchRequest/SearchRequest";
 import Viewmyrequest from "../Pages/Dashboard/Myrequest/Viewmyrequest";
+import EditRequest from "../Pages/Dashboard/Myrequest/EditRequest";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
       {
         path:"/Dashboard/view-request/:id",
         Component: Viewmyrequest
+      },
+      {
+        path:"/Dashboard/edit-request/:id",
+        Component: EditRequest
       }
     ]
   }

@@ -1,13 +1,13 @@
 import { HeartHandshake } from 'lucide-react';
 import React, { use, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
 
 const DonationDetails = () => {
-
+    const navigate =useNavigate()
     const [details,setDetails]=useState(null)
     const {id}=useParams();
     const axiosSecure =useAxiosSecure();
@@ -37,6 +37,7 @@ const DonationDetails = () => {
   .then(res=>{
     Swal.fire("Your Donate success", "", "success");
     console.log(res.data);
+    navigate("/donation-request")
   })
   .catch(error =>{
     console.log(error);

@@ -1,5 +1,5 @@
 import React, { use, useState } from "react";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash} from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -22,10 +22,11 @@ const Login = () => {
     Login(email,password)
     .then(result=>{
         console.log(result.user);
+        toast.success("your log in successfull")
+        navigate("/")
     })
     .then(error =>{
-        navigate("/")
-        toast.success("your log in successfull")
+        toast.error("Please invalide password")
         console.log(error);
     })
 
@@ -100,7 +101,6 @@ const Login = () => {
           </fieldset>
         </form>
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 };

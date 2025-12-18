@@ -1,9 +1,10 @@
 import React, { use } from "react";
 import Donor from "./Donor";
 import { AuthContext } from "../../../Context/AuthContext";
+import Admin from "./Admin";
 
 const MainDashboard = () => {
-  const {user}=use(AuthContext);
+  const {user,role}=use(AuthContext);
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       {/* Welcome Section */}
@@ -16,7 +17,17 @@ const MainDashboard = () => {
         </div>
       </div>
 
-      <Donor></Donor>
+      {
+        role === "donor" && <Donor></Donor>
+      }
+      {
+        role === "admin" && <Admin></Admin>
+      }
+      
+      {
+        role === "volunteer" && <Admin></Admin>
+      }
+      
      
     </div>
   );

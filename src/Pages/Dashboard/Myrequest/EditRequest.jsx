@@ -1,21 +1,34 @@
-import React, { use, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { AuthContext } from "../../../Context/AuthContext";
-import axios from "axios";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import Swal from "sweetalert2";
+import axios from 'axios';
+import React, { use, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate, useParams } from 'react-router';
+import { AuthContext } from '../../../Context/AuthContext';
+import { toast } from 'react-toastify';
 
-const Addrequest = () => {
-  const { user } = use(AuthContext);
-  const [upazilas, setUpazilas] = useState([]);
-  const [districts, setDistricts] = useState([]);
+const EditRequest = () => {
+    const {id} = useParams();
+      const { user } = use(AuthContext);
+      const [upazilas, setUpazilas] = useState([]);
+      const [districts, setDistricts] = useState([]);
+     const [data,setData]=useState(null)
+     const navigate =useNavigate()
 
-  const axiosSecure = useAxiosSecure();
+    useEffect(()=>{
+        axios.get(`http://localhost:5000/Dashboard/edit-request/${id}`)
+        .then(res =>{
+            setData(res.data)
+            console.log(res.data);
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+    },[id])
 
+
+    
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -29,8 +42,8 @@ const Addrequest = () => {
     });
   }, []);
 
-  const onSubmit = async (data) => {
-    const {
+  const onSubmit =async(data)=>{
+     const {
       requestMessage,
       donationTime,
       donationDate,
@@ -43,8 +56,8 @@ const Addrequest = () => {
       requesterEmail,
       requesterName,
     } = data;
-
-    const formData = {
+    
+       const formData = {
       requestMessage,
       donationTime,
       donationDate,
@@ -56,39 +69,23 @@ const Addrequest = () => {
       recipientName,
       requesterEmail,
       requesterName,
-      status: "panding",
     };
 
-    await axiosSecure
-      .post("/request", formData)
-      .then((res) => {
+    axios.put(`http://localhost:5000/Dashboard/update-request/${id}`,formData)
+    .then(res =>{
         console.log(res.data);
-
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your Request Add Successfull",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .then((error) => {
+        toast.success("your Update successfull")
+            navigate("/Dashboard/My-request")
+    })
+    .catch(error =>{
         console.log(error);
-        // Swal.fire({
-        //   position:"top-end",
-        //   icon: "error",
-        //   title: "Oops...",
-        //   text: "Your request not successfull !",
-        //   footer: '<a href="#">Why do I have this issue?</a>',
-        // });
-      });
 
-    console.log(data);
-    reset();
-  };
+    })
 
-  return (
-    <div className="min-h-screen  flex items-center justify-center p-6">
+  }
+
+    return (
+            <div className="min-h-screen  flex items-center justify-center p-6">
       <div className="w-full max-w-2xl shadow-xl rounded-2xl p-6">
         <div>
           <h2 className="text-2xl font-semibold mb-6 text-center">
@@ -104,7 +101,7 @@ const Addrequest = () => {
                 readOnly
                 value={user?.displayName || ""}
                 placeholder={user?.displayName}
-                className="w-full p-2 rounded-lg border"
+                className="w-full p-2 rounded-lg border bg-gray-100"
                 {...register("requesterName")}
               />
             </div>
@@ -117,7 +114,7 @@ const Addrequest = () => {
                 readOnly
                 value={user?.email || ""}
                 placeholder={user?.email}
-                className="w-full p-2 rounded-lg border"
+                className="w-full p-2 rounded-lg border bg-gray-100"
                 {...register("requesterEmail")}
               />
             </div>
@@ -128,7 +125,8 @@ const Addrequest = () => {
               <input
                 type="text"
                 className="w-full p-2 rounded-lg border"
-                {...register("recipientName", { required: true })}
+                {...register("recipientName",{required:true})}
+                defaultValue={data?.recipientName}
               />
               {errors.recipientName && (
                 <p className="text-red-500 text-sm">
@@ -141,9 +139,9 @@ const Addrequest = () => {
 
             <label className="block font-medium">District</label>
             <select
-              defaultValue={"Select Your District"}
+              defaultValue={data?.district}
               className="select w-full p-2 rounded-lg border-black"
-              {...register("district")}
+              {...register("district",{required:true})}
             >
               <option disabled={true}>Select Your District</option>
               {districts.map((district) => (
@@ -156,9 +154,9 @@ const Addrequest = () => {
             {/* Upazila Selector */}
             <label className="block font-medium">Upazila</label>
             <select
-              defaultValue={"Select Your Upazila"}
+              defaultValue={data?.upazila}
               className="select w-full p-2 rounded-lg border-black"
-              {...register("upazila")}
+              {...register("upazila",{required:true})}
             >
               <option disabled={true}>Select Your Upazila</option>
               {upazilas.map((upazila) => (
@@ -176,6 +174,7 @@ const Addrequest = () => {
                 className="w-full p-2 rounded-lg border"
                 placeholder="Dhaka Medical College Hospital"
                 {...register("hospitalName", { required: true })}
+                defaultValue={data?.hospitalName}
               />
             </div>
 
@@ -189,6 +188,7 @@ const Addrequest = () => {
                 className="w-full p-2 rounded-lg border"
                 placeholder="Zahir Raihan Rd, Dhaka"
                 {...register("fullAddress", { required: true })}
+                defaultValue={data?.fullAddress}
               />
             </div>
 
@@ -200,9 +200,9 @@ const Addrequest = () => {
               <select
                 defaultValue={"Select Blood Group"}
                 className="select w-full p-2 rounded-lg border-black"
-                {...register("blood")}
+                {...register("blood" ,{required:true})}
               >
-                <option disabled={true}>Select Blood Group</option>
+                <option >{data?.blood}</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -221,6 +221,7 @@ const Addrequest = () => {
                 type="date"
                 className="w-full p-2 rounded-lg border"
                 {...register("donationDate", { required: true })}
+                defaultValue={data?.donationDate}
               />
             </div>
 
@@ -231,6 +232,7 @@ const Addrequest = () => {
                 type="time"
                 className="w-full p-2 rounded-lg border"
                 {...register("donationTime", { required: true })}
+                defaultValue={data?.donationTime}
               />
             </div>
 
@@ -242,21 +244,34 @@ const Addrequest = () => {
                 rows={4}
                 placeholder="Explain why blood is needed..."
                 {...register("requestMessage", { required: true })}
+                defaultValue={data?.requestMessage}
               ></textarea>
             </div>
 
             {/* Submit Button */}
+           <div className='flex justify-between'>
+             <Link to={"/Dashboard/My-request"}>
+             <button
+              
+              className="text-lg py-3 btn bg-red-500 rounded-xl"
+            >
+              Cancel
+            </button>
+             </Link>
+
             <button
               type="submit"
-              className="w-full text-lg py-3 btn bg-lime-500 rounded-xl"
+              className=" text-lg py-3 btn bg-lime-500 rounded-xl"
             >
-              Submit Request
+              Update Request
             </button>
+           </div>
           </form>
         </div>
       </div>
     </div>
-  );
+
+    );
 };
 
-export default Addrequest;
+export default EditRequest;

@@ -1,10 +1,8 @@
-import React, { use, useEffect, useState } from 'react';
-import { AuthContext } from '../../../Context/AuthContext';
+import React, {  useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
 const Viewmyrequest = () => {
-    const {user}=use(AuthContext);
     const {id}=useParams()
     const [data,setData]=useState(null)
     console.log(data);
@@ -12,6 +10,9 @@ const Viewmyrequest = () => {
         axios.get(`http://localhost:5000/Dashboard/view-request/${id}`)
         .then(res =>{
             setData(res.data)
+        })
+        .catch(error=>{
+          console.log(error);
         })
     },[id])
     return (
