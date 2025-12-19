@@ -99,7 +99,7 @@ const Register = () => {
 
 
   return (
-    <div className="flex justify-center min-h-screen items-center text-black">
+    <div className="flex justify-center min-h-screen items-center ">
       <div className="card bg-base-100 shrink-0 shadow-2xl ">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
           <h1 className="text-2xl font-bold text-red-400 text-center">
@@ -265,7 +265,7 @@ const Register = () => {
               )}
             </div>
 
-            <button type="submit" className="btn bg-red-500  col-span-2 mt-4">
+            <button type="submit" className="btn bg-red-500  lg:col-span-2 mt-4">
               Regester
             </button>
 

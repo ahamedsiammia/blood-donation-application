@@ -26,7 +26,6 @@ const Login = () => {
         navigate("/")
     })
     .then(error =>{
-        toast.error("Please invalide password")
         console.log(error);
     })
 
