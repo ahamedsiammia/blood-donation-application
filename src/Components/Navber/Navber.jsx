@@ -5,6 +5,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 import { BiLogOutCircle, BiSolidDonateBlood } from 'react-icons/bi';
 import { LuLayoutDashboard } from 'react-icons/lu';
+import { FaTint } from 'react-icons/fa';
 
 const Navbar = () => {
     const { user, LogOut ,loading} =useContext(AuthContext)
@@ -37,8 +38,8 @@ const Navbar = () => {
       <div className='shadow-lg'>
           <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
             <div className="flex items-center gap-1 mb-3 ">
-                <BiSolidDonateBlood size={40} color='red' />
-                <h2 className="text-2xl text-orange-500 font-bold tracking-wide"><span className='text-red-600'>Blood</span> Donation</h2>
+                <FaTint className="text-white text-3xl text-red-500 animate-bounce" size={40} color='red' />
+                <h2 className="text-2xl  font-bold tracking-wide"><span className='text-red-500'>Blood</span> Donation</h2>
             </div>
             <div className="nav flex flex-col md:flex-row gap-5 items-center text-lg ">
                 <NavLink to="/" className={({ isActive }) => isActive ?

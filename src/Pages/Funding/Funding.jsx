@@ -50,41 +50,87 @@ if(loading){
 
 
     return (
-        <div className='container mx-auto mt-10 p-4'>
-            <h1 className='text-red-500 font-bold text-4xl text-center'>Funding Details</h1>
-            <div>
-                <form onSubmit={handleCheckout} >
-                    <div className='lg:flex  gap-5 mt-5 '>
-                        <input name='donateAmount' type="number" className=' appearance-none rounded-lg border border-gray-300 p-2  focus:outline-none focus:ring-2 focus:ring-teal-400 ' placeholder='Amount'  min={1} />
+        <div className="container mx-auto mt-10 p-4">
+  <h1 className="text-red-500 font-bold text-2xl sm:text-4xl text-center">
+    Funding Details
+  </h1>
 
-                    <button type='submit' className='btn  text-red-500 p-5 '> <span><BiDonateBlood size={20} /></span> Give Funding </button>
-                    </div>
-                </form>
+  <div>
 
-                <div className="overflow-x-auto mt-5 ">
-              <table className="table table-zebra">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th> Funding Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {
-                      funding.map((fund,index)=><tr key={index}>
-                      <td>{index+1}</td>
-                      <td>{fund?.donorName}</td>
-                      <td>{fund?.amount}</td>
-                      <td>{fund?.paidAt}</td>
-                    </tr> )
-                    }
-                </tbody>
-              </table>
-            </div>
-            </div>
+    {/*  Donation Form  */}
+
+    <form onSubmit={handleCheckout}>
+      <div className="flex flex-col lg:flex-row gap-4 mt-5 items-center">
+        <input
+          name="donateAmount"
+          type="number"
+          className="appearance-none rounded-lg border border-gray-300 p-2 w-full lg:w-64 focus:outline-none focus:ring-2 focus:ring-red-400"
+          placeholder="Amount"
+          min={1}
+        />
+
+        <button
+          type="submit"
+          className="btn text-red-500 p-5 w-full lg:w-auto flex gap-2 items-center justify-center"
+        >
+          <BiDonateBlood size={20} /> Give Funding
+        </button>
+      </div>
+    </form>
+
+    {/*  DESKTOP TABLE  */}
+
+    <div className="hidden md:block overflow-x-auto mt-5">
+      <table className="table table-zebra">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Funding Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {funding.map((fund, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{fund?.donorName}</td>
+              <td>{fund?.amount}</td>
+              <td>{fund?.paidAt}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    {/*  MOBILE CARD VIEW */}
+
+    <div className="block md:hidden mt-5 space-y-4">
+      {funding.map((fund, index) => (
+        <div
+          key={index}
+          className="card bg-base-100 shadow border"
+        >
+          <div className="card-body p-4 text-sm space-y-1">
+            <p>
+              <b>#</b> {index + 1}
+            </p>
+            <p>
+              <b>Name:</b> {fund?.donorName}
+            </p>
+            <p>
+              <b>Amount:</b> {fund?.amount}
+            </p>
+            <p>
+              <b>Funding Date:</b> {fund?.paidAt}
+            </p>
+          </div>
         </div>
+      ))}
+    </div>
+  </div>
+</div>
     );
 };
 

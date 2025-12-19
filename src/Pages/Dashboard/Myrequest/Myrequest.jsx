@@ -141,6 +141,12 @@ const Myrequest = () => {
 
         <div className="overflow-x-auto">
           <div className="sm:hidden">
+            
+              {
+                  myrequest.length === 0 && <p className=" my-5 text-xl text-red-500 text-center font-bold">No Request Found Please Add Request</p>
+                }
+
+
             {/* Mobile Card Layout */}
             {myrequest.map((request, index) => (
               <div key={request._id} className="bg-base-200 rounded-lg p-4 mb-4 shadow">
@@ -229,6 +235,7 @@ const Myrequest = () => {
               </div>
             ))}
           </div>
+          
 
           {/* Desktop Table Layout */}
           <div className="hidden sm:block">
@@ -323,6 +330,12 @@ const Myrequest = () => {
                   ))}
                 </tbody>
               </table>
+
+              
+                {
+                  myrequest.length === 0 && <p className=" my-20 text-4xl text-red-500 text-center font-bold">No Request Found Please Add Request</p>
+                }
+
           </div>
         </div>
       </div>

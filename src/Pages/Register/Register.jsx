@@ -100,12 +100,12 @@ const Register = () => {
 
   return (
     <div className="flex justify-center min-h-screen items-center text-black">
-      <div className="card bg-base-100 w-11/12 max-w-sm shrink-0 shadow-2xl ">
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-          <h1 className="text-2xl font-bold text-center">
+      <div className="card bg-base-100 shrink-0 shadow-2xl ">
+        <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
+          <h1 className="text-2xl font-bold text-red-400 text-center">
             Regester your account
           </h1>
-          <fieldset className="fieldset">
+          <fieldset className="fieldset grid grid-cols-1 lg:grid-cols-2">
             {/* Name field */}
             <div>
               <label className="label">Name</label>
@@ -153,7 +153,8 @@ const Register = () => {
             </div>
 
               {/* Photo field */}
-            <label className="label">Photo Url</label>
+           <div>
+             <label className="label">Photo Url</label>
             <input
               type="file"
               className="input"
@@ -161,8 +162,12 @@ const Register = () => {
               {...register("photo", { required: "photo is required" })}
             />
 
+           </div>
+
               {/* blood group */}
-            <label for="bloodGroup">Blood Group</label>
+      
+            <div>
+              <label for="bloodGroup">Blood Group</label>
             <select defaultValue={"Select Blood Group"} className="select" {...register("blood")}>
               <option disabled={true} >Select Blood Group</option>
               <option value="A+">A+</option>
@@ -174,10 +179,12 @@ const Register = () => {
               <option value="O+">O+</option>
               <option value="O-">O-</option>
             </select>
+          </div>
 
               {/* select district */}
 
-            <label for="district">District</label>
+               <div>
+              <label for="district">District</label>
             <select defaultValue={"Select Your District"} className="select" {...register("district")}>
               <option disabled={true} >Select Your District</option>
               {
@@ -185,14 +192,20 @@ const Register = () => {
               }
             </select>
 
+            </div>
+
             {/* select upazila */}
-              <label for="district">Upazila</label>
+
+            <div>
+                <label for="district">Upazila</label>
             <select defaultValue={"Select Your Upazila"} className="select" {...register("upazila")}>
               <option disabled={true} >Select Your Upazila</option>
               {
                 upazilas.map(upazila => <option key={upazila.id} value={upazila?.name}>{upazila?.name}</option>)
               }
             </select>
+
+           </div>
 
             {/* password field */}
             <div className="relative">
@@ -252,10 +265,11 @@ const Register = () => {
               )}
             </div>
 
-            <button type="submit" className="btn btn-neutral mt-4">
+            <button type="submit" className="btn bg-red-500  col-span-2 mt-4">
               Regester
             </button>
 
+          </fieldset>
 
             <p className="font-semibold text-center">
               Already Have An Account ?{" "}
@@ -263,11 +277,11 @@ const Register = () => {
                 Login
               </Link>
             </p>
-          </fieldset>
         </form>
       </div>
       {/* <ToastContainer /> */}
     </div>
+
   );
 };
 
