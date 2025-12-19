@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
+import Loading from "../../../Components/Loading/Loading";
 
 const Allrequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,13 +13,11 @@ const Allrequest = () => {
   const [itemPerPage,setItePerPage]=useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedStatus, setSelectedStatus] = useState('');
-
+  const [loading,setLoading]=useState(true);
 
   const handleStatusChange =(event)=>{
     const value = event.target.value;
     setSelectedStatus(value);
-      
-    
   }
 
 console.log(selectedStatus);
@@ -30,6 +29,7 @@ console.log(selectedStatus);
         console.log(res.data);
         setAllrequest(res.data.request);
         setTotalRequest(res.data.totalRequest);
+        setLoading(false)
       })
       .catch((error) => {
         console.log(error);
@@ -38,9 +38,9 @@ console.log(selectedStatus);
 
 
   useEffect(() => {
-
+    
     fetchRequest()
-  }, [axiosSecure,currentPage ,itemPerPage,]);
+  }, [axiosSecure,currentPage ,itemPerPage,selectedStatus]);
 
   const numberofPages = Math.ceil(totalRequest / itemPerPage);
 
@@ -114,6 +114,11 @@ console.log(selectedStatus);
         console.log(error);
       });
   };
+
+
+  if(loading){
+    return <Loading></Loading>
+  }
 
 
   return (

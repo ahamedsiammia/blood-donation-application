@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { FaHandHoldingUsd, FaHeartbeat, FaUsers } from 'react-icons/fa';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { GiTakeMyMoney } from 'react-icons/gi';
 
 const Admin = () => {
 const axiosSecure=useAxiosSecure()
 const [user,setUser]=useState('')
 const [totalRequest,setTotalRequest]=useState("")
+const [funding,setFunding]=useState([])
+
+
     useEffect(()=>{
          axiosSecure.get("/All-user")
         .then(res=>{
@@ -26,6 +30,21 @@ const [totalRequest,setTotalRequest]=useState("")
       });
     },[axiosSecure])
 
+
+
+     useEffect(()=>{
+      axiosSecure.get("/payment-details")
+      .then(res=>{
+        setFunding(res.data)
+      })
+      .catch(error =>{
+        console.log(error);
+      })
+    },[axiosSecure])
+
+        const totalAmount = funding.reduce((total, payment) => {
+                 return total + payment.amount;
+           }, 0);
 
 
 
@@ -57,8 +76,8 @@ const [totalRequest,setTotalRequest]=useState("")
               <h3 className="text-sm text-gray-500 uppercase">
                 Total Funding
               </h3>
-              <p className="text-3xl font-bold text-secondary mt-2">
-                ৳ 85,000
+              <p className="text-3xl font-bold text-secondary mt-2 flex gap-3 items-center">
+                 {totalAmount} <GiTakeMyMoney  />
               </p>
             </div>
             <div className="p-4 rounded-full bg-secondary/10">

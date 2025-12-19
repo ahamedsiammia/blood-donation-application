@@ -1,23 +1,26 @@
 import axios from 'axios';
 import React, {  useEffect, useState } from 'react';
+import Loading from '../../Components/Loading/Loading';
 
 const SearchRequest = () => {
     const [upazila, setUpazila] = useState("");
   const [district, setDistrict] = useState("");
   const [upazilas, setUpazilas] = useState([]);
   const [districts, setDistricts] = useState([]);
-
+  const [loading,setLoading]=useState(true)
   const [filterData,setFilterData]=useState([]);
 
   useEffect(() => {
     axios.get("/upazilas.json").then((res) => {
       setUpazilas(res.data.upazilas);
+      setLoading(false)
     });
   }, []);
 
   useEffect(() => {
     axios.get("/districts.json").then((res) => {
       setDistricts(res.data.districts);
+      setLoading(false)
     });
   }, []);
 
@@ -28,9 +31,14 @@ const SearchRequest = () => {
     axios.get(`http://localhost:5000/search-request?bloodGroup=${bloodGroup}&district=${district}&upazila=${upazila}`)
     .then(res =>{
        setFilterData(res.data);
+       setLoading(false)
+       
     })
   }
 
+  if(loading){
+    return <Loading></Loading>
+  }
  
 
     return (
@@ -131,12 +139,6 @@ const SearchRequest = () => {
               <p className="text-sm">Recipient Name: {data.recipientName}</p>
               <p className="text-sm">Location: {data.hospitalName}</p>
               <p className="text-sm">Requester Email: {data.requesterEmail}</p>
-
-              {/* <div className="card-actions justify-end mt-4">
-                <button className="btn btn-outline btn-primary btn-sm">
-                  View Profile
-                </button>
-              </div> */}
             </div>
           </div>)
           }

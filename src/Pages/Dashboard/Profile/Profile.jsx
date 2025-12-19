@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import Loading from "../../../Components/Loading/Loading";
 
 const Profile = () => {
   const { user } = use(AuthContext);
@@ -13,7 +14,7 @@ const Profile = () => {
   const [upazilas, setUpazilas] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-
+  const [loading,setLoading]=useState(true)
   const {
     register,
     handleSubmit,
@@ -33,10 +34,12 @@ const Profile = () => {
   useEffect(() => {
     axios.get("/upazilas.json").then((res) => {
       setUpazilas(res.data.upazilas);
+      setLoading(false)
     });
 
     axios.get("/districts.json").then((res) => {
       setDistricts(res.data.districts);
+      setLoading(false)
     });
   }, []);
 
@@ -78,6 +81,9 @@ const Profile = () => {
     
   };
 
+  if(loading){
+    return <Loading></Loading>
+  }
   return (
     <div className=" max-w-5xl mx-auto shadow-xl p-5">
       <div className="flex justify-center items-center">

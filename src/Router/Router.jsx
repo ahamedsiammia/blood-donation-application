@@ -38,7 +38,9 @@ export const router = createBrowserRouter([
         },
         {
           path:"/funding",
-          Component: Funding
+          element: <PrivetRoute>
+            <Funding></Funding>
+          </PrivetRoute>
         },
         {
           path:"/search-request",

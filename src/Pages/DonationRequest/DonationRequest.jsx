@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import ShowDonationRequest from "./ShowDonationRequest";
 import axios from "axios";
+import Loading from "../../Components/Loading/Loading";
 
 const DonationRequest = () => {
   const [pnadingData, setPandingData] = useState([]);
+  const [loading,setLoading]=useState(true)
 
   useEffect(() => {
     axios.get("http://localhost:5000/donation-page").then((res) => {
       console.log(res.data);
       setPandingData(res.data)
+      setLoading(false)
     })
     .catch(error =>{
         console.log(error);
     })
   }, []);
+
+    if(loading){
+    return <Loading></Loading>
+  }
 
   if(pnadingData.length == 0){
     return   <div className="text-center text-red-500 text-4xl mt-10">

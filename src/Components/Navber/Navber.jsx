@@ -7,7 +7,7 @@ import { BiLogOutCircle, BiSolidDonateBlood } from 'react-icons/bi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 
 const Navbar = () => {
-    const { user, LogOut } =useContext(AuthContext)
+    const { user, LogOut ,loading} =useContext(AuthContext)
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
     useEffect(() => {
@@ -23,7 +23,6 @@ const Navbar = () => {
 
 
     const handleLogout = () => {
-        // console.log('user try to logout');
         LogOut()
             .then(() => {
                 toast.success('Logged out successfully')
@@ -33,6 +32,7 @@ const Navbar = () => {
             });
 
     }
+
     return (
       <div className='shadow-lg'>
           <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
@@ -40,20 +40,20 @@ const Navbar = () => {
                 <BiSolidDonateBlood size={40} color='red' />
                 <h2 className="text-2xl text-orange-500 font-bold tracking-wide"><span className='text-red-600'>Blood</span> Donation</h2>
             </div>
-            <div className="nav flex flex-col md:flex-row gap-5 items-center">
+            <div className="nav flex flex-col md:flex-row gap-5 items-center text-lg ">
                 <NavLink to="/" className={({ isActive }) => isActive ?
-                    "text-orange-700 underline" : ""}>Home</NavLink>
+                    "text-red-600 underline" : ""}>Home</NavLink>
 
                     {/* donation request  */}
                 <NavLink to="/donation-request" className={({ isActive }) => isActive ?
-                    "text-orange-700 underline" : ""}>Donation Request</NavLink>
+                    "text-red-600 underline" : ""}>Donation Request</NavLink>
 
                 <NavLink to="/search-request" className={({ isActive }) => isActive ?
-                    "text-orange-700 underline" : ""}>Search </NavLink>
+                    "text-red-600 underline" : ""}>Search </NavLink>
 
 
                 <NavLink to="/funding" className={({ isActive }) => isActive ?
-                    "text-orange-700 underline" : ""}>Funding</NavLink>
+                    "text-red-600 underline" : ""}>Funding</NavLink>
 
             </div>
 
@@ -92,19 +92,10 @@ const Navbar = () => {
                                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box lg:w-52 space-y-5 "
                             >
                                 <li>
-                                    {/* <span className="font-semibold">
-                                        {user.displayName || user.email}
-                                    </span> */}
+
                                     <Link to={"/Dashboard"} className='text-lg' > <span><LuLayoutDashboard /></span> Dashboard</Link>
                                 </li>
-                                {/* update profile */}
 
-                                {/* <li>
-                                    <span className="font-semibold">
-                                        <Link to='/myprofile'>Update Profile</Link>
-                                    </span>
-                                </li> */}
-                                
                                 <li>
                                     <button onClick={handleLogout} className='text-lg'> <span><BiLogOutCircle /></span> Logout</button>
                                 </li>

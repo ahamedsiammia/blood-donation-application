@@ -1,15 +1,17 @@
 import React, {useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Loading from '../../../Components/Loading/Loading';
 
 const Alluser = () => {
     const axiosSecure =useAxiosSecure();
     const [users,setUsers]=useState([]);
+    const [loading,setLoading]=useState(true)
 
     const fetchUser =()=>{
          axiosSecure.get("/All-user")
         .then(res=>{
             setUsers(res.data.user)
-            console.log(res.data);
+            setLoading(false)
         })
         .catch(error =>{
             console.log(error);
@@ -26,6 +28,21 @@ const Alluser = () => {
             console.log(res.data);
             fetchUser()
         })
+    }
+
+    const handlerole =(email,role)=>{
+      axiosSecure.patch(`/update/role?email=${email}&role=${role}`)
+      .then(res=>{
+        console.log(res.data);
+        fetchUser()
+      })
+      .catch(error =>{
+        console.log(error);
+      })
+    }
+
+    if(loading){
+      return <Loading></Loading>
     }
 
 
@@ -68,20 +85,57 @@ const Alluser = () => {
               <td>{user?.email}</td>
               <td>{user?.role}</td>
               <td>
-                <span className="badge badge-success">{user?.status}</span>
+                <span className={`badge ${user?.status === 'active' ? "badge-success":"badge-error"}`}>{user?.status}</span>
               </td>
 
-              {
-                user?.status == "active" ? <td>
-                <button onClick={()=>handleChangeStatus(user?.email,"blocked")} className="btn btn-sm btn-error">Blocked</button>
-              </td>: <td>
-                <button onClick={()=>handleChangeStatus(user?.email,"active")} className="btn btn-sm btn-ghost">Unblock</button>
-              </td>
-              }
-             
-              
-              
-              
+              <td>
+   <div className="dropdown dropdown-end bg-lime-300">
+    <label tabIndex={0} className="btn btn-sm btn-outline">
+      Actions
+    </label>
+
+    <ul
+      tabIndex={0}
+      className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40"
+    >
+      {/* Block / Unblock */}
+      {
+        user?.status === "active" ? (
+          <li>
+            <button
+              onClick={() => handleChangeStatus(user?.email, "blocked")}
+              className="text-red-500"
+            >
+              Block User
+            </button>
+          </li>
+        ) : (
+          <li>
+            <button
+              onClick={() => handleChangeStatus(user?.email, "active")}
+              className="text-green-500"
+            >
+              Unblock User
+            </button>
+          </li>
+        )
+      }
+
+      {/* Role Actions */}
+      <li>
+        <button onClick={()=>{handlerole(user?.email,"volunteer")}}>
+          Make Volunteer
+        </button>
+      </li>
+
+      <li>
+        <button onClick={()=>{handlerole(user?.email,"admin")}}>
+          Make Admin
+        </button>
+      </li>
+    </ul>
+  </div>
+</td>
             </tr>
                 ))
             }
