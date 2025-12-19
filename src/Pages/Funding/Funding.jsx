@@ -55,7 +55,7 @@ if(loading){
             <div>
                 <form onSubmit={handleCheckout} >
                     <div className='lg:flex  gap-5 mt-5 '>
-                        <input name='donateAmount' type="number" className=' appearance-none rounded-lg border border-gray-300 p-2  focus:outline-none focus:ring-2 focus:ring-teal-400 ' placeholder='Amount'  min={0} />
+                        <input name='donateAmount' type="number" className=' appearance-none rounded-lg border border-gray-300 p-2  focus:outline-none focus:ring-2 focus:ring-teal-400 ' placeholder='Amount'  min={1} />
 
                     <button type='submit' className='btn  text-red-500 p-5 '> <span><BiDonateBlood size={20} /></span> Give Funding </button>
                     </div>

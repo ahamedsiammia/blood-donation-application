@@ -12,10 +12,17 @@ const Myrequest = () => {
   const [myrequest, setMyrequest] = useState([]);
   const [itemPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedStatus, setSelectedStatus] = useState('');
+
+
+   const handleStatusChange =(event)=>{
+    const value = event.target.value;
+    setSelectedStatus(value);
+  }
 
   const fetchRequest = () => {
     axiosSecure
-      .get(`/My-request?page=${currentPage - 1}&size=${itemPerPage}`)
+      .get(`/My-request?page=${currentPage - 1}&size=${itemPerPage}&status=${selectedStatus}`)
       .then((res) => {
         setMyrequest(res.data.request);
         setTotalRequest(res.data.totalRequest);
@@ -27,7 +34,7 @@ const Myrequest = () => {
 
   useEffect(() => {
     fetchRequest();
-  }, [axiosSecure, currentPage, itemPerPage]);
+  }, [axiosSecure, currentPage, itemPerPage,selectedStatus]);
 
   const numberofPages = Math.ceil(totalRequest / itemPerPage);
 
@@ -105,27 +112,127 @@ const Myrequest = () => {
   };
 
   return (
+
     <div>
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="card bg-base-100 shadow">
-          <div className="card-body">
-            {/* Page Title */}
-            <h2 className="text-2xl font-semibold mb-4">
-              🩸 My Donation Requests
-            </h2>
+  <div className="max-w-7xl mx-auto p-6">
+    <div className="card bg-base-100 shadow">
+      <div className="card-body">
+        {/* Page Title */}
+        <h2 className="text-2xl font-semibold mb-4">
+          🩸 My Donation Requests
+        </h2>
 
-            {/* Filter Section (Static UI Only) */}
-            <div className="flex flex-wrap gap-3 mb-4">
-              <button className="btn btn-sm btn-outline">All</button>
-              <button className="btn btn-sm btn-outline">Pending</button>
-              <button className="btn btn-sm btn-outline">In Progress</button>
-              <button className="btn btn-sm btn-outline">Done</button>
-              <button className="btn btn-sm btn-outline">Canceled</button>
-            </div>
+        {/* Filter Section (Static UI Only) */}
+        <div className="text-black mb-4">
+          <select
+            value={selectedStatus}
+            onChange={handleStatusChange}
+            className="select lg:w-[200px] sm:w-auto p-2 rounded-lg border-black bg-lime-300"
+          >
+            <option value=" " disabled={true} >Filter with Status</option>
+            <option value="panding">panding</option>
+            <option value="Done">Done</option>
+            <option value="inprogress">inprogress</option>
+            <option value="canceled">canceled</option>
+          </select>
+        </div>
+    
+        {/* Donation Requests Table */}
 
-            {/* Donation Requests Table */}
-            <div className="overflow-x-auto">
-              <table className="table table-zebra">
+        <div className="overflow-x-auto">
+          <div className="sm:hidden">
+            {/* Mobile Card Layout */}
+            {myrequest.map((request, index) => (
+              <div key={request._id} className="bg-base-200 rounded-lg p-4 mb-4 shadow">
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">#{currentPage * 10 + (index + 1) - 10}</span>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
+                        request.status === "panding"
+                          ? "bg-yellow-500"
+                          : request.status === "inprogress"
+                          ? "bg-blue-500"
+                          : request.status === "canceled"
+                          ? "bg-red-500"
+                          : request.status === "Done"
+                          ? "bg-green-500"
+                          : "bg-gray-500"
+                      }`}
+                    >
+                      {request.status}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Recipient Name: </span>
+                    <span>{request.recipientName}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Location: </span>
+                    <span>{request.hospitalName}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Date: </span>
+                    <span>{request.donationDate}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Time: </span>
+                    <span>{request.donationTime}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Blood Group: </span>
+                    <span className="badge badge-error">{request.blood}</span>
+                  </div>
+                  {request.status === "inprogress" && (
+                    <div>
+                      <span className="font-medium">Donor Email: </span>
+                      <span>{request.requesterEmail}</span>
+                    </div>
+                  )}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    <Link to={`/Dashboard/view-request/${request._id}`}>
+                      <button className="btn btn-xs btn-outline">View</button>
+                    </Link>
+                    {request.status === "inprogress" && (
+                      <>
+                        <button
+                          onClick={() => hendleDone(request._id, "Done")}
+                          className="btn btn-xs btn-outline"
+                        >
+                          Done
+                        </button>
+                        <button
+                          onClick={() =>
+                            hendleCencel(request._id, "canceled")
+                          }
+                          className="btn btn-xs btn-outline btn-error"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
+                    {request.status === "pending" && (
+                      <>
+                        <Link to={`/Dashboard/edit-request/${request._id}`}>
+                          <button className="btn btn-xs btn-outline text-green-500">Edit</button>
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(request._id)}
+                          className="btn btn-xs btn-outline"
+                        >
+                          <RiDeleteBin6Line size={15} />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table Layout */}
+          <div className="hidden sm:block">
+             <table className="table table-zebra w-full">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -158,14 +265,14 @@ const Myrequest = () => {
                         <span
                           className={`px-3 py-1 rounded-full text-sm font-semibold text-white ${
                             request.status === "panding"
-                              ? "bg-yellow-500"
-                              : request.status === "inprogress"
-                              ? "bg-blue-500"
-                              : request.status === "canceled"
-                              ? "bg-red-500"
-                              : request.status === "done"
-                              ? "bg-green-500"
-                              : "bg-gray-500"
+                           ? "bg-yellow-500"
+                          : request.status === "inprogress"
+                          ? "bg-blue-500"
+                          : request.status === "canceled"
+                          ? "bg-red-500"
+                          : request.status === "Done"
+                          ? "bg-green-500"
+                          : "bg-gray-500"
                           }`}
                         >
                           {request.status}
@@ -216,30 +323,33 @@ const Myrequest = () => {
                   ))}
                 </tbody>
               </table>
-            </div>
           </div>
         </div>
       </div>
-
-      <div className="flex justify-center mt-12 gap-5">
-        <button onClick={handlePre} className="btn">
-          pre
-        </button>
-        {pages.map((page) => (
-          <button
-            onClick={() => setCurrentPage(page)}
-            className={`btn ${
-              page === currentPage ? " bg-[#435585] text-white " : " "
-            }`}
-          >
-            {page}
-          </button>
-        ))}
-        <button onClick={handleNext} className="btn">
-          Next
-        </button>
-      </div>
     </div>
+  </div>
+
+  <div className="flex justify-center mt-12 gap-5 flex-wrap">
+    <button onClick={handlePre} className="btn">
+      pre
+    </button>
+    {pages.map((page) => (
+      <button
+        key={page}
+        onClick={() => setCurrentPage(page)}
+        className={`btn ${
+          page === currentPage ? " bg-[#435585] text-white " : " "
+        }`}
+      >
+        {page}
+      </button>
+    ))}
+    <button onClick={handleNext} className="btn">
+      Next
+    </button>
+  </div>
+</div>
+
   );
 };
 
