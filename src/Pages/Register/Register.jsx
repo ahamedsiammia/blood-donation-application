@@ -1,11 +1,15 @@
 import React, { use, useEffect, useState,  } from "react";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle, FaTint } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
+
+      import { motion } from "framer-motion";
+
+
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -102,7 +106,7 @@ const Register = () => {
     <div className="flex justify-center min-h-screen items-center ">
       <div className="card bg-base-100 shrink-0 shadow-2xl ">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
-          <h1 className="text-2xl font-bold text-red-400 text-center">
+          <h1 className="text-2xl font-bold text-red-400 text-center flex justify-center">  <FaTint className="text-white text-3xl text-red-500 animate-bounce" size={40} color='red' />
             Regester your account
           </h1>
           <fieldset className="fieldset grid grid-cols-1 lg:grid-cols-2">
@@ -266,7 +270,7 @@ const Register = () => {
             </div>
 
             <button type="submit" className="btn bg-red-500  lg:col-span-2 mt-4">
-              Regester
+              Create Account
             </button>
 
           </fieldset>

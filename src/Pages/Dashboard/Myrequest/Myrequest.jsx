@@ -18,6 +18,7 @@ const Myrequest = () => {
    const handleStatusChange =(event)=>{
     const value = event.target.value;
     setSelectedStatus(value);
+    setCurrentPage(1)
   }
 
   const fetchRequest = () => {
@@ -196,7 +197,7 @@ const Myrequest = () => {
                     </div>
                   )}
                   <div className="flex flex-wrap gap-2 pt-2">
-                    <Link to={`/Dashboard/view-request/${request._id}`}>
+                    <Link to={`/dashboard/view-request/${request._id}`}>
                       <button className="btn btn-xs btn-outline">View</button>
                     </Link>
                     {request.status === "inprogress" && (
@@ -219,7 +220,7 @@ const Myrequest = () => {
                     )}
                     {request.status === "pending" && (
                       <>
-                        <Link to={`/Dashboard/edit-request/${request._id}`}>
+                        <Link to={`/dashboard/edit-request/${request._id}`}>
                           <button className="btn btn-xs btn-outline text-green-500">Edit</button>
                         </Link>
                         <button

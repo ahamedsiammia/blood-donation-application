@@ -63,15 +63,17 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path:"Dashboard",
+    path:"dashboard",
     element: <PrivetRoute> <DashboardLayout></DashboardLayout> </PrivetRoute> ,
     children:[
       {
-        path:"/Dashboard",
-        Component:MainDashboard
+       
+        index: true,
+        // Component:MainDashboard
+        element: <MainDashboard></MainDashboard>
       },
       {
-        path:"Add-request",
+        path:"/dashboard/Add-request",
         Component: Addrequest
       },
       {
@@ -91,11 +93,11 @@ export const router = createBrowserRouter([
         Component:Allrequest
       },
       {
-        path:"/Dashboard/view-request/:id",
+        path:"/dashboard/view-request/:id",
         Component: Viewmyrequest
       },
       {
-        path:"/Dashboard/edit-request/:id",
+        path:"/dashboard/edit-request/:id",
         Component: EditRequest
       }
     ]

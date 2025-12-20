@@ -14,6 +14,7 @@ const Aside = () => {
     const {LogOut,role}=use(AuthContext);
     const navigate =useNavigate()
     const [open, setOpen] = useState(false);
+    const [active,setActive]=useState("dashboard")
 
     const handleLogout=()=>{
         LogOut()
@@ -61,11 +62,11 @@ const Aside = () => {
 
             {/* Main Dashboard */}
             <NavLink
-              to="/Dashboard"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard"
+               onClick={() => {setOpen(false);setActive("dashboard")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-blue-600" : ""
+                  active === "dashboard" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -76,11 +77,11 @@ const Aside = () => {
             {/* Add request */}
            {
             role == "donor" &&  <NavLink
-              to="/Dashboard/Add-request"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/Add-request"
+              onClick={() => {setOpen(false);setActive("Add-request")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-blue-600" : ""
+                  active === "Add-request" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -92,11 +93,11 @@ const Aside = () => {
             {/* Users */}
             {
               role == "admin" && <NavLink
-              to="/Dashboard/All-user"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/All-user"
+               onClick={() => {setOpen(false);setActive("All-user")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-green-600" : ""
+                  active === "All-user" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -109,11 +110,11 @@ const Aside = () => {
             {
               role == "donor" && 
               <NavLink
-              to="/Dashboard/My-request"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/My-request"
+               onClick={() => {setOpen(false);setActive("My-request")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-purple-600" : ""
+                  active === "My-request" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -125,11 +126,11 @@ const Aside = () => {
             {/* all request */}
             {
               role == "admin" && <NavLink
-              to="/Dashboard/All-request"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/All-request"
+               onClick={() => {setOpen(false);setActive("All-request")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-purple-600" : ""
+                  active === "All-request" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -140,11 +141,11 @@ const Aside = () => {
 
             {
               role == "volunteer" && <NavLink
-              to="/Dashboard/All-request"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/All-request"
+                onClick={() => {setOpen(false);setActive("All-request")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-purple-600" : ""
+                  active === "All-request" ? "bg-blue-600" : ""
                 }`
               }
             >
@@ -156,11 +157,11 @@ const Aside = () => {
 
               {/* profile */}
             <NavLink
-              to="/Dashboard/profile"
-               onClick={() => setOpen(false)}
-              className={({ isActive }) =>
+              to="/dashboard/profile"
+               onClick={() => {setOpen(false);setActive("profile")}}
+              className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  isActive ? "bg-yellow-600" : ""
+                  active === "profile" ? "bg-blue-600" : ""
                 }`
               }
             >

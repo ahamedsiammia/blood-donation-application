@@ -21,11 +21,18 @@ const MainDashboard = () => {
         role === "donor" && <Donor></Donor>
       }
       {
-        role === "admin" && <Admin></Admin>
+        role === "admin" && <>
+        <Admin></Admin> 
+
+        </>
       }
       
       {
-        role === "volunteer" && <Admin></Admin>
+        role === "volunteer" && <>
+        <Admin></Admin>
+
+        </>
+        
       }
       
      

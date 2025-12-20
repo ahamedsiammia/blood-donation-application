@@ -1,4 +1,3 @@
-
 import {
   FaFacebookF,
   FaTwitter,
@@ -92,7 +91,7 @@ const Footer = () => {
       <div className="border-t border-base-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-2 text-sm">
           <p>
-            © {new Date().getFullYear()} BloodCare. All rights reserved.
+            © {new Date().getFullYear()} Blood Donation. All rights reserved.
           </p>
           <p className="flex items-center gap-1">
             Made with <FaHeart className="text-red-500" /> to save lives

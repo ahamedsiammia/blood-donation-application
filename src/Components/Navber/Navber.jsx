@@ -104,12 +104,12 @@ const Navbar = () => {
 
                         </div>
                     ) : (
-                        <div className='flex gap-3'>
+                        <div className='flex gap-3 '>
                             <div className="login-btn">
-                                <Link to='/login' className="btn btn-primary px-10 ">Login</Link>
+                                <Link to='/login' className="btn text-white bg-red-500  px-10 ">Login</Link>
                             </div>
                             <div className="login-btn">
-                                <Link to='/register' className="btn btn-primary px-10 ">Sign Up</Link>
+                                <Link to='/register' className="btn text-white bg-red-500 px-10 ">Sign Up</Link>
                             </div>
                         </div>
                     )

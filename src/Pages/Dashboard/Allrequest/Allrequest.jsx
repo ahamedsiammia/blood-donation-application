@@ -20,6 +20,7 @@ const Allrequest = () => {
   const handleStatusChange =(event)=>{
     const value = event.target.value;
     setSelectedStatus(value);
+    setCurrentPage(1)
   }
 
 console.log(selectedStatus);
@@ -223,14 +224,14 @@ console.log(selectedStatus);
                       </>
                     )}
 
-                    <Link to={`/Dashboard/view-request/${request._id}`}>
+                    <Link to={`/dashboard/view-request/${request._id}`}>
                       <button className="btn btn-xs btn-outline">View</button>
                     </Link>
 
                     {request.status === "panding" && (
                       <>
                         {role !== "volunteer" && (
-                          <Link to={`/Dashboard/edit-request/${request._id}`}>
+                          <Link to={`/dashboard/edit-request/${request._id}`}>
                             <button className="btn btn-xs btn-outline text-green-500">
                               Edit
                             </button>

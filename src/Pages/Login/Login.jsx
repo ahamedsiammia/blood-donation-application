@@ -25,7 +25,8 @@ const Login = () => {
         toast.success("your log in successfull")
         navigate("/")
     })
-    .then(error =>{
+    .catch(error =>{
+      toast.error("Rong password! please vlaide password")
         console.log(error);
     })
 
@@ -39,7 +40,7 @@ const Login = () => {
     <div className="flex justify-center min-h-screen items-center text-black">
       <div className="card bg-base-100 w-11/12 max-w-sm shrink-0 shadow-2xl ">
         <form onSubmit={handleSubmit(onsubmit)} className="card-body">
-          <h1 className="text-3xl font-bold text-center">Login your account</h1>
+          <h1 className="text-3xl font-bold text-center text-red-500">Welcome Back!</h1>
           <fieldset className="fieldset">
             {/* email field */}
             <div>
@@ -87,7 +88,7 @@ const Login = () => {
                 </p>
               )}
             </div>
-            <button type="submit" className="btn btn-neutral mt-4">
+            <button type="submit" className="btn bg-red-500 mt-4">
               Login
             </button>
 
