@@ -173,7 +173,9 @@ const Donor = () => {
 
                       {request.status === "panding" && (
                         <>
+                        <Link to={`/dashboard/edit-request/${request._id}`}>
                           <button className="btn btn-xs btn-outline text-green-500">Edit</button>
+                        </Link>
                           <button
                             onClick={() => handleDelete(request._id)}
                             className="btn btn-xs btn-outline"
