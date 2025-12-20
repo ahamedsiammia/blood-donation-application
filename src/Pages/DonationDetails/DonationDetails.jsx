@@ -13,7 +13,7 @@ const DonationDetails = () => {
     const axiosSecure =useAxiosSecure();
     const {user}=use(AuthContext);
     useEffect(()=>{
-      axios.get(`http://localhost:5000/donation-details/${id}`)
+      axios.get(`https://project11-server.vercel.app/donation-details/${id}`)
       .then(res=>{
         setDetails(res.data)
       })

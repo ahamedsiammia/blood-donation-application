@@ -141,9 +141,10 @@ console.log(selectedStatus);
           <select
             value={selectedStatus}
             onChange={handleStatusChange}
+            defaultValue={"Filter With Status"}
             className="select p-2 rounded-lg border-black bg-lime-300 w-full sm:w-64"
           >
-            <option value=" " disabled>Filter with Status</option>
+            <option value=" " disabled={true}>Filter with Status</option>
             <option value="panding">panding</option>
             <option value="Done">Done</option>
             <option value="inprogress">inprogress</option>

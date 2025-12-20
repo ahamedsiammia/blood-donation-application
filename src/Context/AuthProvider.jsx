@@ -42,6 +42,15 @@ const Login =(email,password)=>{
         const unsubscrib = onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser);
             setLoading(false);
+              axios.get(`https://project11-server.vercel.app/user/role/${currentUser?.email}`)
+        .then(res =>{
+            console.log("console res data",res);
+            setRole(res.data.role)
+            setStatus(res.data.status)            
+            setRoleLoading(false)
+        
+
+        })
         });
         return ()=>{
             unsubscrib()
@@ -49,16 +58,7 @@ const Login =(email,password)=>{
 
     },[])
 
-    useEffect(()=>{
-        if(!user)return
-        axios.get(`http://localhost:5000/user/role/${user?.email}`)
-        .then(res =>{
-            setRole(res.data.role)
-            setStatus(res.data.status)            
-            setRoleLoading(false)
 
-        })
-    },[user])
 
     const authData ={
         user,

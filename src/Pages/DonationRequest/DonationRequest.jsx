@@ -8,7 +8,7 @@ const DonationRequest = () => {
   const [loading,setLoading]=useState(true)
 
   useEffect(() => {
-    axios.get("http://localhost:5000/donation-page").then((res) => {
+    axios.get("https://project11-server.vercel.app/donation-page").then((res) => {
       console.log(res.data);
       setPandingData(res.data)
       setLoading(false)

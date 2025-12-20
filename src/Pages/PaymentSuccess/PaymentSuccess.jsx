@@ -8,7 +8,7 @@ const PaymentSuccess = () => {
     const sessionId =searchParams.get("session_id");
 
     useEffect(()=>{
-        axios.post(`http://localhost:5000/success-payment?session_id=${sessionId}`).then(res =>{
+        axios.post(`https://project11-server.vercel.app/success-payment?session_id=${sessionId}`).then(res =>{
             console.log(res.data);
         })
     },[sessionId])

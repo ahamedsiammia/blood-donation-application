@@ -1,16 +1,44 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# [Client Live Link](https://animated-druid-2f5fd8.netlify.app/)
+# [Server Live Link](https://project11-server.vercel.app/)
+# [Server Github repo Link]()
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project Name: **Drop Life**
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Description:
+The Drop Life Application is a user-friendly platform that connects blood donors with recipients in need. Built with the **MERN stack (MongoDB, Express.js, React, Node.js)**, this application facilitates seamless blood donation management, donor registration, and request tracking.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Technologies Used:
+
+Frontend-->
+
+{
+  "@tailwindcss/vite": "^4.1.17",
+  "axios": "^1.13.2",
+  "firebase": "^12.6.0",
+  "react": "^19.2.0",
+  "react-dom": "^19.2.0",
+  "react-icons": "^5.5.0",
+  "react-responsive-carousel": "^3.2.23",
+  "react-router": "^7.10.1",
+  "react-toastify": "^11.0.5",
+  "sweetalert2": "^11.26.10",
+  "tailwindcss": "^4.1.17"
+}
+
+
+Backend-->
+
+{ Node.js,
+Express.js,
+MongoDB,
+CORS,
+dotenv }
+
+
+Authentication-->
+
+{ Firebase Auth (Email/Password + Google Login) }

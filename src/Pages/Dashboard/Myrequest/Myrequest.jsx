@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link } from "react-router";
+import Loading from "../../../Components/Loading/Loading";
 
 const Myrequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +14,7 @@ const Myrequest = () => {
   const [itemPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedStatus, setSelectedStatus] = useState('');
-
+  const [loading,setLoading]=useState(true)
 
    const handleStatusChange =(event)=>{
     const value = event.target.value;
@@ -27,6 +28,7 @@ const Myrequest = () => {
       .then((res) => {
         setMyrequest(res.data.request);
         setTotalRequest(res.data.totalRequest);
+        setLoading(false)
       })
       .catch((error) => {
         console.log(error);
@@ -112,6 +114,10 @@ const Myrequest = () => {
       });
   };
 
+  if(loading){
+    return <Loading></Loading>
+  }
+
   return (
 
     <div>
@@ -128,9 +134,10 @@ const Myrequest = () => {
           <select
             value={selectedStatus}
             onChange={handleStatusChange}
+            defaultValue={"Filter With Status"}
             className="select lg:w-[200px] sm:w-auto p-2 rounded-lg border-black bg-lime-300"
           >
-            <option value=" " disabled={true} >Filter with Status</option>
+            <option  disabled={true} >Filter with Status</option>
             <option value="panding">panding</option>
             <option value="Done">Done</option>
             <option value="inprogress">inprogress</option>

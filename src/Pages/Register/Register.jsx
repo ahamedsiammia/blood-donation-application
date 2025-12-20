@@ -7,7 +7,6 @@ import axios from "axios";
 import { updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 
-      import { motion } from "framer-motion";
 
 
 
@@ -77,7 +76,7 @@ const Register = () => {
         console.log(result.user)
 
         // post user in database
-        axios.post("http://localhost:5000/user",userData)
+        axios.post("https://project11-server.vercel.app/user",userData)
         .then(res =>{
           console.log(res);
             toast.success("your log register successfull")
@@ -283,7 +282,6 @@ const Register = () => {
             </p>
         </form>
       </div>
-      {/* <ToastContainer /> */}
     </div>
 
   );

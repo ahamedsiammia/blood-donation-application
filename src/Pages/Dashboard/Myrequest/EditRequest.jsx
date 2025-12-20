@@ -14,7 +14,7 @@ const EditRequest = () => {
      const navigate =useNavigate()
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/Dashboard/edit-request/${id}`)
+        axios.get(`https://project11-server.vercel.app/Dashboard/edit-request/${id}`)
         .then(res =>{
             setData(res.data)
             console.log(res.data);
@@ -71,7 +71,7 @@ const EditRequest = () => {
       requesterName,
     };
 
-    axios.put(`http://localhost:5000/Dashboard/update-request/${id}`,formData)
+    axios.put(`https://project11-server.vercel.app/Dashboard/update-request/${id}`,formData)
     .then(res =>{
         console.log(res.data);
         toast.success("your Update successfull")

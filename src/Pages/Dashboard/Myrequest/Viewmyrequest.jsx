@@ -7,7 +7,7 @@ const Viewmyrequest = () => {
     const [data,setData]=useState(null)
     console.log(data);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/Dashboard/view-request/${id}`)
+        axios.get(`https://project11-server.vercel.app/Dashboard/view-request/${id}`)
         .then(res =>{
             setData(res.data)
         })

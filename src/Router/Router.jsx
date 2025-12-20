@@ -18,88 +18,117 @@ import PaymentSuccess from "../Pages/PaymentSuccess/PaymentSuccess";
 import SearchRequest from "../Pages/SearchRequest/SearchRequest";
 import Viewmyrequest from "../Pages/Dashboard/Myrequest/Viewmyrequest";
 import EditRequest from "../Pages/Dashboard/Myrequest/EditRequest";
+import Blog from "../Pages/Home/Blog";
+import blogdetails from "../Pages/Home/blogdetails";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:RootLayOut,
-    children:[
-        {
-            index:true,
-            path:"/",
-            Component: Home,
-        },
-        {
-            path:"/login",
-            Component: Login
-        },
-        {
-            path:"/register",
-            Component: Register
-        },
-        {
-          path:"/funding",
-          element: <PrivetRoute>
+    Component: RootLayOut,
+    errorElement: ErrorPage,
+    children: [
+      {
+        path: "*",
+        Component: ErrorPage,
+      },
+      {
+        index: true,
+        path: "/",
+        Component: Home,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/funding",
+        element: (
+          <PrivetRoute>
             <Funding></Funding>
           </PrivetRoute>
-        },
-        {
-          path:"/search-request",
-          Component: SearchRequest
-        },
-        {
-          path:"/payment-success",
-          Component: PaymentSuccess
-        },
-        {
-          path:"/donation-request",
-          Component: DonationRequest
-        },
-        {
-          path:"/donation-details/:id",
-          element: <PrivetRoute>
+        ),
+      },
+      {
+        path: "/search-request",
+        Component: SearchRequest,
+      },
+      {
+        path: "/payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "/donation-request",
+        Component: DonationRequest,
+      },
+      {
+        path: "/donation-details/:id",
+        element: (
+          <PrivetRoute>
             <DonationDetails></DonationDetails>
           </PrivetRoute>
-        }
-    ]
+        ),
+      },
+      {
+        path: "/blog/",
+        Component: Blog,
+      },
+      {
+        path: "/blogdetails/:id",
+        Component: blogdetails,
+        loader: async ({ params }) => {
+          const res = await fetch("/Blog.json");
+          const data = await res.json();
+          return data.find((blog) => blog.id === params.id);
+        },
+      },
+    ],
   },
   {
-    path:"dashboard",
-    element: <PrivetRoute> <DashboardLayout></DashboardLayout> </PrivetRoute> ,
-    children:[
+    path: "dashboard",
+    element: (
+      <PrivetRoute>
+        {" "}
+        <DashboardLayout></DashboardLayout>{" "}
+      </PrivetRoute>
+    ),
+    children: [
       {
-       
         index: true,
         // Component:MainDashboard
-        element: <MainDashboard></MainDashboard>
+        element: <MainDashboard></MainDashboard>,
       },
       {
-        path:"/dashboard/Add-request",
-        Component: Addrequest
+        path: "/dashboard/Add-request",
+        Component: Addrequest,
       },
       {
-        path:"All-user",
-        Component:Alluser
+        path: "All-user",
+        Component: Alluser,
       },
       {
-        path:"My-request",
-        Component: Myrequest
+        path: "My-request",
+        Component: Myrequest,
       },
       {
-        path:"profile",
-        Component:Profile
+        path: "profile",
+        Component: Profile,
       },
       {
-        path:"All-request",
-        Component:Allrequest
+        path: "All-request",
+        Component: Allrequest,
       },
       {
-        path:"/dashboard/view-request/:id",
-        Component: Viewmyrequest
+        path: "/dashboard/view-request/:id",
+        Component: Viewmyrequest,
       },
       {
-        path:"/dashboard/edit-request/:id",
-        Component: EditRequest
-      }
-    ]
-  }
+        path: "/dashboard/edit-request/:id",
+        Component: EditRequest,
+      },
+    ],
+  },
 ]);
