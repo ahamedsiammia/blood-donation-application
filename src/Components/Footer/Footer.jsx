@@ -80,7 +80,7 @@ const Footer = () => {
             <a href="https://www.instagram.com/siam.farhanahamed/" target="_blank" rel="noreferrer" className="btn btn-circle btn-outline">
               <FaInstagram />
             </a>
-            <a href="https://www.linkedin.com/in/md-siam-b48ab1352/" target="_blank" rel="noreferrer" className="btn btn-circle btn-outline">
+            <a href="https://www.linkedin.com/in/siam-ahamed/" target="_blank" rel="noreferrer" className="btn btn-circle btn-outline">
               <FaLinkedinIn />
             </a>
           </div>

@@ -1,15 +1,19 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import Banner from '../../Components/Banner';
-import FeatureSection from './FeatureSection/FeatureSection';
+import Features from './Features/Features';
 import Contract from './Contract/Contract';
 
 const Home = () => {
     return (
-        <div >
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+        >
             <Banner></Banner>
-            <FeatureSection></FeatureSection>
+            <Features></Features>
             <Contract></Contract>
-        </div>
+        </motion.div>
     );
 };
 

@@ -93,7 +93,6 @@ const Donor = () => {
         <h2 className="text-2xl font-semibold mb-4">
           🩸 Resent Donation Requests
         </h2>
-
         {/* Donation Requests - Responsive Layout */}
         <div className="overflow-x-auto">
           {/* Desktop Table (visible on sm and above) */}

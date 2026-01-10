@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../Context/AuthContext';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
-import { BiLogOutCircle, BiSolidDonateBlood } from 'react-icons/bi';
+import { BiLogOutCircle,} from 'react-icons/bi';
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { FaTint } from 'react-icons/fa';
 
@@ -35,7 +35,7 @@ const Navbar = () => {
     }
 
     return (
-      <div className='shadow-lg'>
+      <div className='shadow-lg lg:sticky lg:top-0 lg:z-50 lg:bg-base-100'>
           <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
             <div className="flex items-center gap-1 mb-3 ">
                 <FaTint className="text-white text-3xl text-red-500 animate-bounce" size={40} color='red' />
