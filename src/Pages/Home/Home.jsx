@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import Banner from '../../Components/Banner';
 import Features from './Features/Features';
 import Contract from './Contract/Contract';
+import ServicesSection from '../../Components/ServicesSection/ServicesSection';
+import StatisticsSection from '../../Components/StatisticsSection/StatisticsSection';
+import NewsletterSection from '../../Components/NewsletterSection/NewsletterSection';
 
 const Home = () => {
     return (
@@ -12,6 +15,9 @@ const Home = () => {
         >
             <Banner></Banner>
             <Features></Features>
+            <ServicesSection></ServicesSection>
+            <StatisticsSection></StatisticsSection>
+            <NewsletterSection></NewsletterSection>
             <Contract></Contract>
         </motion.div>
     );

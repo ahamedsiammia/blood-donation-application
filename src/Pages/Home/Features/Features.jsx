@@ -215,16 +215,8 @@ const Features = () => {
                     })}
                 </motion.div>
 
-                {/* Call to Action */}
-                <motion.div 
-                    className="text-center mt-16"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                >
+                
 
-                </motion.div>
             </div>
         </section>
     );

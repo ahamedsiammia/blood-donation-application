@@ -2,6 +2,7 @@ import React, { use } from "react";
 import Donor from "./Donor";
 import { AuthContext } from "../../../Context/AuthContext";
 import Admin from "./Admin";
+import DashboardChart from "./DashboardChart";
 
 const MainDashboard = () => {
   const {user,role}=use(AuthContext);
@@ -31,9 +32,12 @@ const MainDashboard = () => {
         role === "volunteer" && <>
         <Admin></Admin>
 
-        </>
-        
+        </>        
       }
+
+      <div>
+        <DashboardChart></DashboardChart>
+      </div>
       
      
     </div>
