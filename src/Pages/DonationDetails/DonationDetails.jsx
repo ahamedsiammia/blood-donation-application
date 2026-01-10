@@ -51,8 +51,8 @@ const DonationDetails = () => {
    
     return (
         <div>
-             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg p-8">
+             <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-full max-w-4xl rounded-2xl shadow-lg p-8">
         {/* Header */}
         <div className="flex flex-col items-center mb-8">
           <HeartHandshake className="w-10 h-10 text-pink-500 mb-2" />
