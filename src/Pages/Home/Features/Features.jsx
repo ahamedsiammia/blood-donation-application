@@ -117,7 +117,7 @@ const Features = () => {
                     </motion.div>
                     
                     <motion.h2 
-                        className="text-5xl font-bold text-gray-800 mb-6"
+                        className="text-5xl font-bold mb-6"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -160,7 +160,7 @@ const Features = () => {
                                 }}
                                 className="group relative"
                             >
-                                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full">
+                                <div className=" rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full">
                                     
                                     {/* Animated Background Gradient */}
                                     <motion.div
@@ -181,7 +181,7 @@ const Features = () => {
                                     {/* Content */}
                                     <div className="relative">
                                         <motion.h3 
-                                            className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-red-600 transition-colors duration-300"
+                                            className="text-2xl font-bold  mb-4 group-hover:text-red-600  transition-colors duration-300"
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
@@ -191,7 +191,7 @@ const Features = () => {
                                         </motion.h3>
                                         
                                         <motion.p 
-                                            className="text-gray-600 leading-relaxed"
+                                            className=" leading-relaxed"
                                             initial={{ opacity: 0, x: -20 }}
                                             whileInView={{ opacity: 1, x: 0 }}
                                             viewport={{ once: true }}
