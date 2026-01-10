@@ -96,7 +96,7 @@ const Features = () => {
 
     return (
         <section className="py-20 bg-gradient-to-br from-base-100 to-base-200">
-            <div className="max-w-7xl mx-auto px-4">
+            <div className="container mx-auto px-4">
                 
                 {/* Section Header */}
                 <motion.div 
