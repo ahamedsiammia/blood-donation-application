@@ -8,7 +8,7 @@ import { LuLayoutDashboard } from 'react-icons/lu';
 import { FaTint } from 'react-icons/fa';
 
 const Navbar = () => {
-    const { user, LogOut ,loading} =useContext(AuthContext)
+    const { user, LogOut} =useContext(AuthContext)
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const Navbar = () => {
 
     return (
       <div className='shadow-lg lg:sticky lg:top-0 lg:z-50 lg:bg-base-100'>
-          <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5   max-w-screen-xl mx-auto">
+          <div className="flex flex-col gap-3 md:flex-row justify-between items-center p-5 container mx-auto">
             <div className="flex items-center gap-1 mb-3 ">
                 <FaTint className="text-white text-3xl text-red-500 animate-bounce" size={40} color='red' />
                 <h2 className="text-2xl  font-bold tracking-wide"><span className='text-red-500'>Blood</span> Donation</h2>
@@ -58,6 +58,9 @@ const Navbar = () => {
 
                 <NavLink to="/funding" className={({ isActive }) => isActive ?
                     "text-red-600 underline" : ""}>Funding</NavLink>
+
+                <NavLink to="/about" className={({ isActive }) => isActive ?
+                    "text-red-600 underline" : ""}>About </NavLink>
 
             </div>
 
@@ -86,6 +89,7 @@ const Navbar = () => {
                                         alt="User Avatar"
                                         src={user.photoURL || 'https://img.icons8.com/?size=64&id=115318&format=png'}
                                     />
+                                    
                                 </div>
                             </div>
 

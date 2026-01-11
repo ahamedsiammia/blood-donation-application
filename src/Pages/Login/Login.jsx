@@ -37,17 +37,18 @@ const Login = () => {
 
 
   return (
-    <div className="flex justify-center min-h-screen items-center text-black">
-      <div className="card bg-base-100 w-11/12 max-w-sm shrink-0 shadow-2xl ">
+    <div className="flex justify-center min-h-screen items-center bg-white">
+      <img className="hidden md:block md:w-[400px] " src="https://i.postimg.cc/YqYRbz0r/loginimage2.png" alt="" />
+      <div className="card bg-base-100 w-11/12 max-w-sm shrink-0 shadow-2xl bg-white text-black">
         <form onSubmit={handleSubmit(onsubmit)} className="card-body">
           <h1 className="text-3xl font-bold text-center text-red-500">Welcome Back!</h1>
-          <fieldset className="fieldset">
+          <fieldset className="fieldset ">
             {/* email field */}
             <div>
               <label className="label">Email</label>
               <input
                 type="email"
-                className="input"
+                className="input bg-white "
                 placeholder="Email"
                 {...register("email", {
                   required: "Email is required",
@@ -70,7 +71,7 @@ const Login = () => {
               <label className="label">Password</label>
               <input
                 type={show ? "text" : "password"}
-                className="input"
+                className="input bg-white"
                 placeholder="Password"
                 {...register("password",)}
               />

@@ -40,7 +40,7 @@ const StatisticsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-6 md:mb-12">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2">
-            Our <span className="text-primary">Impact</span> So Far
+            Our <span className="text-red-600">Impact</span> So Far
           </h2>
           <p className="text-base-content/70 max-w-2xl mx-auto text-xs sm:text-sm md:text-base lg:text-lg">
             Every drop counts. Together we're building a stronger, more connected 
@@ -70,7 +70,7 @@ const StatisticsSection = () => {
                   {stat.icon}
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-1 sm:mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-1 sm:mb-2 bg-gradient-to-r from-red-500 to-secondary bg-clip-text text-transparent">
                   {stat.number}
                 </h3>
 

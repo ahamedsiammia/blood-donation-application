@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { FaHeartbeat, FaTint, FaHandsHelping } from "react-icons/fa";
 import { Link } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+import Loading from "../../Components/Loading/Loading";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+  const {loading}=use(AuthContext);
 
   useEffect(() => {
     fetch("/Blog.json")
@@ -17,6 +20,10 @@ const Blog = () => {
     <FaTint className="text-rose-500" size={30} />,
     <FaHandsHelping className="text-green-500" size={30} />,
   ];
+
+  if(loading){
+    return <Loading></Loading>
+  }
 
   return (
     <section className="py-16 bg-base-200">
@@ -34,7 +41,7 @@ const Blog = () => {
 
         {/* Blog Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog, index) => (
+          {blogs.map((blog, index) => (            
             <div
               key={blog.id}
               className="card bg-base-100 shadow-lg hover:shadow-xl transition duration-300"
@@ -68,6 +75,7 @@ const Blog = () => {
 
               </div>
             </div>
+           
           ))}
         </div>
 

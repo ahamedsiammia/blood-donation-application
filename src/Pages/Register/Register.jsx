@@ -102,7 +102,10 @@ const Register = () => {
 
 
   return (
-    <div className="flex justify-center min-h-screen items-center ">
+    <div className="flex justify-center my-5 min-h-screen items-center relative ">
+      <div className="absolute left-35 ">
+            <img className="  block md:hidden lg:block" src="https://i.postimg.cc/KjhpQqn0/freepik-upload-48477-removebg-preview.png" alt="" />
+      </div>
       <div className="card bg-base-100 shrink-0 shadow-2xl ">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
           <h1 className="text-2xl font-bold text-red-400 text-center flex justify-center">  <FaTint className="text-white text-3xl text-red-500 animate-bounce" size={40} color='red' />

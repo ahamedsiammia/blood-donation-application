@@ -21,6 +21,7 @@ import EditRequest from "../Pages/Dashboard/Myrequest/EditRequest";
 import Blog from "../Pages/Home/Blog";
 import blogdetails from "../Pages/Home/blogdetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import About from "../Pages/About/About";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
           return data.find((blog) => blog.id === params.id);
         },
       },
+      {
+        path:"/about",
+        Component: About
+      }
     ],
   },
   {

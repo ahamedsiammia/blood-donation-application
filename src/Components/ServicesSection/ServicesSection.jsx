@@ -61,7 +61,7 @@ const ServicesSection = () => {
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            How We <span className="text-primary">Help</span> Save Lives
+            How We <span className="text-red-600">Help</span> Save Lives
           </h2>
           <p className="text-base-content/70 max-w-2xl mx-auto text-lg">
             Our platform makes blood donation simple, fast, and accessible for everyone in need.

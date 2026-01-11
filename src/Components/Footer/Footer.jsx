@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="flex items-center gap-2 mb-4">
             <FaTint className="text-red-500 text-3xl" />
             <h2 className="text-2xl font-bold">
-              Blood<span className="text-red-500">Care</span>
+              Blood<span className="text-red-500">Donation</span>
             </h2>
           </div>
           <p className="text-sm leading-relaxed">
