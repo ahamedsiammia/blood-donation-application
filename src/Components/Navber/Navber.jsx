@@ -62,6 +62,9 @@ const Navbar = () => {
                 <NavLink to="/about" className={({ isActive }) => isActive ?
                     "text-red-600 underline" : ""}>About </NavLink>
 
+                <NavLink to="/support" className={({ isActive }) => isActive ?
+                    "text-red-600 underline" : ""}>Support </NavLink>
+
             </div>
 
             <div className='flex justify-center items-center gap-4'>

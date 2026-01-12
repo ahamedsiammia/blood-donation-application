@@ -5,13 +5,14 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import axios from 'axios';
 import { AuthContext } from '../../Context/AuthContext';
+import Loading from '../../Components/Loading/Loading';
 
 const DonationDetails = () => {
     const navigate =useNavigate()
     const [details,setDetails]=useState(null)
     const {id}=useParams();
     const axiosSecure =useAxiosSecure();
-    const {user}=use(AuthContext);
+    const {user,loading}=use(AuthContext);
     useEffect(()=>{
       axios.get(`https://project11-server.vercel.app/donation-details/${id}`)
       .then(res=>{
@@ -29,7 +30,7 @@ const DonationDetails = () => {
   showDenyButton: true,
   showCancelButton: true,
   confirmButtonText: "Donate",
-  denyButtonText: `Don't save`
+  denyButtonText: `Don't Donate`
 }).then((result) => {
   if (result.isConfirmed) {
     
@@ -48,55 +49,80 @@ const DonationDetails = () => {
   }
 });
     }
+
+    if(loading){
+      return <Loading></Loading>
+    }
    
     return (
-        <div>
-             <div className="min-h-screen flex items-center justify-center  p-4">
-      <div className="w-full max-w-4xl rounded-2xl shadow-lg p-8">
-        {/* Header */}
-        <div className="flex flex-col items-center mb-8">
-          <HeartHandshake className="w-10 h-10 text-pink-500 mb-2" />
-          <h1 className="text-2xl font-semibold text-pink-500">
-            Donation Requests Details
-          </h1>
+ 
+    <div className="min-h-screen  flex items-center justify-center p-4">
+    <div className="w-full max-w-5xl  rounded-3xl shadow-xl overflow-hidden">
+      
+      {/* Header */}
+      <div className="bg-gradient-to-r from-pink-500 to-red-500 p-8 text-center text-white">
+        <HeartHandshake className="w-12 h-12 mx-auto mb-3" />
+        <h1 className="text-3xl font-bold">Donation Request Details</h1>
+        <p className="text-sm opacity-90 mt-1">
+          Help save a life by donating blood
+        </p>
+      </div>
+
+      {/* Body */}
+      <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Left Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-pink-500 border-b pb-2">
+            Request Information
+          </h2>
+
+          <p><span className="font-semibold">Requester Name:</span> {details?.requesterName}</p>
+          <p><span className="font-semibold">Requester Email:</span> {details?.requesterEmail}</p>
+          <p><span className="font-semibold">Recipient Name:</span> {details?.recipientName}</p>
+          <p><span className="font-semibold">Blood Group:</span> 
+            <span className="ml-2 px-3 py-1 rounded-full bg-red-100 text-red-600 font-semibold">
+              {details?.blood}
+            </span>
+          </p>
         </div>
 
-        {/* Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-          <div className="space-y-3">
-            <p className='text-lg'><span className="font-semibold">Requester Name:</span> {details?.requesterName}</p>
+        {/* Right Section */}
+        <div className="space-y-4">
+          <h2 className="text-lg font-semibold text-pink-500 border-b pb-2">
+            Location & Status
+          </h2>
 
-            <p className='text-lg'><span className="font-semibold">Recipient Name:</span> {details?.recipientName}</p>
+          <p><span className="font-semibold">District:</span> {details?.district}</p>
+          <p><span className="font-semibold">Upazila:</span> {details?.upazila}</p>
+          <p><span className="font-semibold">Hospital:</span> {details?.hospitalName}</p>
+          <p><span className="font-semibold">Full Address:</span> {details?.fullAddress}</p>
 
-            <p className='text-lg'><span className="font-semibold">District:</span> {details?.district}</p>
-
-            <p className='text-lg'><span className="font-semibold">Full Address:</span> {details?.fullAddress}</p>
-            
-         
+          <div>
+            <span className="font-semibold">Status:</span>
+            <span className={`ml-2 px-3 py-1 rounded-full text-sm font-semibold
+              ${details?.status === "pending" ? "bg-yellow-100 text-yellow-600" : 
+                details?.status === "inprogress" ? "bg-blue-100 text-blue-600" : 
+                "bg-green-100 text-green-600"}`}>
+              {details?.status}
+            </span>
           </div>
-
-          <div className="space-y-3">
-            <p className='text-lg'><span className="font-semibold">Requester email:</span> {details?.requesterEmail}</p>
-
-            <p className='text-lg'><span className="font-semibold">Blood Group:</span> {details?.blood}</p>
-
-            <p className='text-lg'><span className="font-semibold">Upazila:</span> {details?.upazila}</p>
-
-            <p className='text-lg'><span className="font-semibold">Hospital Name:</span> {details?.hospitalName}</p>
-          
-            <p className="text-orange-500 text-lg font-semibold">Status: {details?.status}</p>
-          </div>
-        </div>
-
-        {/* Button */}
-        <div className="flex justify-center mt-10">
-          <button onClick={()=>hendleDonate( details?._id, "inprogress")} className="px-8 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600 transition">
-            Donate
-          </button>
         </div>
       </div>
+
+      {/* Footer Button */}
+      <div className="p-8 flex justify-center">
+        <button
+          onClick={() => hendleDonate(details?._id, "inprogress")}
+          className="px-10 py-3 rounded-full bg-gradient-to-r from-pink-500 to-red-500 
+          text-white font-semibold text-lg shadow-md hover:scale-105 transition-transform"
+        >
+          Donate Now 
+        </button>
+      </div>
     </div>
-        </div>
+  </div>
+  
     );
 };
 

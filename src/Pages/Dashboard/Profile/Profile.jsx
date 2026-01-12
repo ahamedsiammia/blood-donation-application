@@ -85,138 +85,178 @@ const Profile = () => {
     return <Loading></Loading>
   }
   return (
-    <div className=" max-w-5xl mx-auto shadow-xl p-5">
-      <div className="flex justify-center items-center">
-        <div className="flex flex-col gap-5">
-          <img
-            className="w-50 h-50 rounded-full object-cover"
-            src={dbuser.image}
-            alt=""
-          />
-          {isEditing ? (
-            " "
-          ) : (
-            <button
-              onClick={() => setIsEditing(true)}
-              className="btn bg-lime-500"
-            >
-              Edit
-            </button>
-          )}
-        </div>
-      </div>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid lg:grid-cols-2 grid-cols-1 mt-10 gap-5"
-      >
-        {/* email field */}
-        <div>
-          <label className="block mb-1 font-medium"> Email</label>
-          <input
-            type="text"
-            readOnly
-            value={dbuser.email}
-            {...register("email")}
-            className="w-full p-2 rounded-lg border"
-          />
-        </div>
-        {/* name field  */}
-        <div>
-          <label className="block mb-1 font-medium"> Name</label>
-          <input
-            type="text"
-            disabled={!isEditing}
-            defaultValue={dbuser.name}
-            className="w-full p-2 rounded-lg border"
-            {...register("name",{required:"please fill name"})}
-          />
-           {errors.name && <p className="text-red-500  mb-1 text-xs ">{errors.name.message}</p>}
+    <div className="max-w-6xl mx-auto bg-white border border-slate-200 rounded-lg p-8">
 
-        </div>
-        {/* image field  */}
-        <div>
-          <label className="block mb-1 font-medium"> Your Photo</label>
-          <input
-            type="file"
-            className="w-full p-2 rounded-lg border relative z-10"
-            {...register("photo",{required:"please fill photo"})}
-          />
-           {errors.photo && <p className="text-red-500  mb-1 text-xs ">{errors.photo.message}</p>}
+  {/* Profile Header */}
+  <div className="flex flex-col md:flex-row items-center md:items-start gap-8 border-b pb-8">
+    
+    {/* Profile Image */}
+    <div className="flex flex-col items-center gap-4">
+      <img
+        src={dbuser.image}
+        alt="Profile"
+        className="w-40 h-40 rounded-full object-cover border-4 border-slate-200"
+      />
 
-        </div>
-        {/* blood group */}
-        <div>
-          <label className="block font-medium mb-1" for="bloodGroup">
-            Blood Group
-          </label>
-          <select
-            disabled={!isEditing}
-            defaultValue={"Select Blood Group"}
-            className="select w-full p-2 rounded-lg border-black"
-            {...register("blood",{required:"please fill blood group"})}
-          >
-            <option>{dbuser.blood}</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
-           {errors.blood && <p className="text-red-500  mb-1 text-xs ">{errors.blood.message}</p>}
-        </div>
-
-        {/* select district */}
-
-        <div>
-          <label className="block font-medium mb-1">District</label>
-          <select
-            defaultValue={"Select Your District"}
-            disabled={!isEditing}
-            className="select w-full p-2 rounded-lg border-black"
-            {...register("district",{required:"please fill district"})}
-          >
-            <option>{dbuser.district}</option>
-            {districts.map((district) => (
-              <option key={district.id} value={district?.name}>
-                {district?.name}
-              </option>
-            ))}
-          </select>
-           {errors.district && <p className="text-red-500  mb-1 text-xs ">{errors.district.message}</p>}
-        </div>
-
-        {/* Upazila Selector */}
-        <div>
-          <label className="block font-medium mb-1">Upazila</label>
-          <select
-            defaultValue={"Select Your Upazila"}
-            disabled={!isEditing}
-            className="select w-full p-2 rounded-lg border-black"
-            {...register("upazila",{required:"please fill upazila"})}
-          >
-            <option>{dbuser.upazila}</option>
-            {upazilas.map((upazila) => (
-              <option key={upazila.id} value={upazila?.name}>
-                {upazila?.name}
-              </option>
-            ))}
-          </select>
-          {errors.upazila && <p className="text-red-500  mb-1 text-xs ">{errors.upazila.message}</p>}
-        </div>
-
-        <div className="lg:col-span-2">
-          {isEditing && (
-          <button type="submit" className="btn bg-lime-500 w-full mt-5">
-            Save
-          </button>
-        )}
-        </div>
-      </form>
+      {!isEditing && (
+        <button
+          onClick={() => setIsEditing(true)}
+          className="px-6 py-2 text-sm font-medium bg-red-500 text-white rounded-md hover:bg-red-800 transition"
+        >
+          Edit Profile
+        </button>
+      )}
     </div>
+
+    {/* Basic Info */}
+    <div className="flex-1 w-full">
+      <h2 className="text-xl font-semibold text-slate-800">
+        {user.displayName}
+      </h2>
+      <p className="text-sm text-slate-500 mt-1">
+        Manage your personal and donation-related information
+      </p>
+    </div>
+  </div>
+
+  {/* Form */}
+  <form
+    onSubmit={handleSubmit(onSubmit)}
+    className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
+  >
+
+    {/* Email */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        Email Address
+      </label>
+      <input
+        type="text"
+        readOnly
+        value={dbuser.email}
+        {...register("email")}
+        className="w-full px-3 py-2 rounded-md border border-slate-300 bg-slate-100 text-sm"
+      />
+    </div>
+
+    {/* Name */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        Full Name
+      </label>
+      <input
+        type="text"
+        disabled={!isEditing}
+        defaultValue={dbuser.name}
+        {...register("name", { required: "please fill name" })}
+        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+      />
+      {errors.name && (
+        <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>
+      )}
+    </div>
+
+    {/* Photo */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        Profile Photo
+      </label>
+      <input
+        type="file"
+        {...register("photo", { required: "please fill photo" })}
+        className="w-full text-sm px-3 py-2 border border-slate-300 rounded-md"
+      />
+      {errors.photo && (
+        <p className="text-xs text-red-500 mt-1">{errors.photo.message}</p>
+      )}
+    </div>
+
+    {/* Blood Group */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        Blood Group
+      </label>
+      <select
+        disabled={!isEditing}
+        {...register("blood", { required: "please fill blood group" })}
+        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+      >
+        <option>{dbuser.blood}</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+      {errors.blood && (
+        <p className="text-xs text-red-500 mt-1">{errors.blood.message}</p>
+      )}
+    </div>
+
+    {/* District */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        District
+      </label>
+      <select
+        disabled={!isEditing}
+        {...register("district", { required: "please fill district" })}
+        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+      >
+        <option>{dbuser.district}</option>
+        {districts.map((district) => (
+          <option key={district.id} value={district.name}>
+            {district.name}
+          </option>
+        ))}
+      </select>
+      {errors.district && (
+        <p className="text-xs text-red-500 mt-1">{errors.district.message}</p>
+      )}
+    </div>
+
+    {/* Upazila */}
+    <div>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        Upazila
+      </label>
+      <select
+        disabled={!isEditing}
+        {...register("upazila", { required: "please fill upazila" })}
+        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+      >
+        <option>{dbuser.upazila}</option>
+        {upazilas.map((upazila) => (
+          <option key={upazila.id} value={upazila.name}>
+            {upazila.name}
+          </option>
+        ))}
+      </select>
+      {errors.upazila && (
+        <p className="text-xs text-red-500 mt-1">{errors.upazila.message}</p>
+      )}
+    </div>
+
+    {/* Save Button */}
+    {isEditing && (
+      <div className="md:col-span-2 flex justify-end pt-4">
+        <button
+          type="submit"
+          className="px-8 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition"
+        >
+          Save Changes
+        </button>
+      </div>
+    )}
+
+  </form>
+</div>
+
+
   );
 };
 

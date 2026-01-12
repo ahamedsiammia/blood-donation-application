@@ -1,5 +1,5 @@
-// DashboardPieChart.jsx
-import React from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   PieChart,
   Pie,
@@ -8,18 +8,45 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
-// Sample data (replace with API later)
-const data = [
-  { name: "Blood Requests", value: 390 },
-  { name: "Donors", value: 260 },
+const DashboardChart = () => {
+
+
+const COLORS = ["#EF4444", "#3B82F6"];
+const axiosSecure= useAxiosSecure()
+
+const [value,setValue]=useState([])
+const [donorvalue,setDonorvalue]=useState([])
+const newvalue = donorvalue.length
+
+  useEffect(()=>{
+    axiosSecure.get("/All-request")
+    .then(res=>{
+      setValue(res.data.totalRequest); 
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  },[axiosSecure,value])
+
+  useEffect(()=>{
+    axiosSecure.get("/donors")
+    .then(res=>{
+      setDonorvalue(res.data)
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+  },[axiosSecure])
+
+  const data = [
+  { name: "Blood Requests", value: value },
+  { name: "Donors", value: newvalue },
 ];
 
-const COLORS = ["#EF4444", "#3B82F6"]; // Red for requests, Blue for donors
-
-export default function DashboardPieChart() {
   return (
-    <div className="bg-gradient-to-br from-white/70 to-gray-100 rounded-3xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
+        <div className="bg-gradient-to-br from-white/70 to-gray-100 rounded-3xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">
         Donors vs Blood Requests
       </h2>
@@ -68,4 +95,7 @@ export default function DashboardPieChart() {
       </div>
     </div>
   );
-}
+};
+
+export default DashboardChart;
+

@@ -22,6 +22,7 @@ import Blog from "../Pages/Home/Blog";
 import blogdetails from "../Pages/Home/blogdetails";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/About/About";
+import Support from "../Pages/Support/Support";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path:"/about",
         Component: About
+      },
+      {
+        path:"/support",
+        Component:Support
       }
     ],
   },
