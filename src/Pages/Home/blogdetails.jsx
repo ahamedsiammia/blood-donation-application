@@ -5,7 +5,7 @@ const blogdetails = () => {
     const blogs = useLoaderData()
     console.log(blogs);
     return (
-        <div className="min-h-screen bg-gray-50 font-sans">
+        <div className="min-h-screen  font-sans">
       {/* Main Container */}
       <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         
@@ -32,11 +32,11 @@ const blogdetails = () => {
         </header>
 
         {/* Content Section */}
-        <article className="space-y-8 text-gray-700 leading-relaxed text-lg">
+        <article className="space-y-8 text-gray-400 leading-relaxed text-lg">
           
           <section>
             <p>
-              <span className="font-bold text-gray-900">Introduction:</span> Welcome to our blood donation website! 
+              <span className="font-bold text-gray-400">Introduction:</span> Welcome to our blood donation website! 
               At the heart of our mission lies a simple yet profound act: donating blood. In this blog post, 
               we'll delve into the importance of blood donation, exploring its impact on individuals, 
               communities, and beyond.
@@ -44,7 +44,7 @@ const blogdetails = () => {
           </section>
 
           <section className="bg-white p-6 rounded-lg border-l-4 border-rose-500 shadow-sm">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Why Donate Blood?</h2>
+            <h2 className="text-2xl font-bold text-gray-400 mb-2">Why Donate Blood?</h2>
             <p>
               Every two seconds, someone in the world needs blood. From emergency surgeries to ongoing 
               treatments for conditions like cancer and anemia, blood transfusions save millions of lives 
@@ -61,15 +61,6 @@ const blogdetails = () => {
 
         </article>
 
-        {/* Call to Action - Button for Navigation */}
-        {/* <div className="text-center mt-8">
-          <Link 
-            to="/donate" 
-            className="bg-rose-600 hover:bg-rose-700 text-white font-bold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 shadow-lg inline-block"
-          >
-            Become a Donor Today
-          </Link>
-        </div> */}
 
       </div>
     </div>
