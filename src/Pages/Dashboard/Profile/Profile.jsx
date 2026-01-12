@@ -136,7 +136,7 @@ const Profile = () => {
         readOnly
         value={dbuser.email}
         {...register("email")}
-        className="w-full px-3 py-2 rounded-md border border-slate-300 bg-slate-100 text-sm"
+        className="w-full px-3 py-2 text-slate-700 rounded-md border border-slate-300 bg-slate-100 text-sm"
       />
     </div>
 
@@ -150,7 +150,7 @@ const Profile = () => {
         disabled={!isEditing}
         defaultValue={dbuser.name}
         {...register("name", { required: "please fill name" })}
-        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+        className="w-full px-3 py-2 text-slate-700 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
       />
       {errors.name && (
         <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>
@@ -165,7 +165,7 @@ const Profile = () => {
       <input
         type="file"
         {...register("photo", { required: "please fill photo" })}
-        className="w-full text-sm px-3 py-2 border border-slate-300 rounded-md"
+        className="w-full text-slate-700 text-sm px-3 py-2 border border-slate-300 rounded-md"
       />
       {errors.photo && (
         <p className="text-xs text-red-500 mt-1">{errors.photo.message}</p>
@@ -180,7 +180,7 @@ const Profile = () => {
       <select
         disabled={!isEditing}
         {...register("blood", { required: "please fill blood group" })}
-        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+        className="w-full px-3 text-slate-700 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
       >
         <option>{dbuser.blood}</option>
         <option value="A+">A+</option>
@@ -205,7 +205,7 @@ const Profile = () => {
       <select
         disabled={!isEditing}
         {...register("district", { required: "please fill district" })}
-        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+        className="w-full px-3 py-2 text-slate-700 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
       >
         <option>{dbuser.district}</option>
         {districts.map((district) => (
@@ -227,7 +227,7 @@ const Profile = () => {
       <select
         disabled={!isEditing}
         {...register("upazila", { required: "please fill upazila" })}
-        className="w-full px-3 py-2 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
+        className="w-full px-3 py-2 text-slate-700 rounded-md border border-slate-300 text-sm disabled:bg-slate-100"
       >
         <option>{dbuser.upazila}</option>
         {upazilas.map((upazila) => (

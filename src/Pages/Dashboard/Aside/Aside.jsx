@@ -31,14 +31,14 @@ const Aside = () => {
     {/* MOBILE MENU BUTTON */}
       <button
         onClick={() => setOpen(!open)}
-        className="lg:hidden p-4 text-2xl fixed top-2 left-2 z-50 bg-lime-500 text-white rounded-lg shadow-md"
+        className="lg:hidden p-4 text-2xl fixed top-2 left-2 z-50 bg-red-500 text-white rounded-lg shadow-md"
       >
         {open ? <AiOutlineClose /> : <AiOutlineMenu />}
       </button>
 
       {/* ASIDE AREA */}
       <aside className={`
-          fixed lg:static top-0 z-30 left-0 h-full w-64 bg-lime-500 text-white p-6 flex flex-col justify-between 
+          fixed lg:static top-0 z-30 left-0 h-full w-64 bg-orange-600 text-white p-6 flex flex-col justify-between 
           transform transition-transform duration-300 
           ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
@@ -66,7 +66,7 @@ const Aside = () => {
                onClick={() => {setOpen(false);setActive("dashboard")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "dashboard" ? "bg-blue-600" : ""
+                  active === "dashboard" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -81,7 +81,7 @@ const Aside = () => {
               onClick={() => {setOpen(false);setActive("Add-request")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "Add-request" ? "bg-blue-600" : ""
+                  active === "Add-request" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -97,7 +97,7 @@ const Aside = () => {
                onClick={() => {setOpen(false);setActive("All-user")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "All-user" ? "bg-blue-600" : ""
+                  active === "All-user" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -114,7 +114,7 @@ const Aside = () => {
                onClick={() => {setOpen(false);setActive("My-request")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "My-request" ? "bg-blue-600" : ""
+                  active === "My-request" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -130,7 +130,7 @@ const Aside = () => {
                onClick={() => {setOpen(false);setActive("All-request")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "All-request" ? "bg-blue-600" : ""
+                  active === "All-request" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -145,7 +145,7 @@ const Aside = () => {
                 onClick={() => {setOpen(false);setActive("All-request")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "All-request" ? "bg-blue-600" : ""
+                  active === "All-request" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -161,7 +161,7 @@ const Aside = () => {
                onClick={() => {setOpen(false);setActive("profile")}}
               className={ 
                 `flex items-center gap-3 p-3 rounded-lg transition hover:bg-gray-700 ${
-                  active === "profile" ? "bg-blue-600" : ""
+                  active === "profile" ? "bg-green-500" : ""
                 }`
               }
             >
@@ -177,10 +177,12 @@ const Aside = () => {
          
 
         {/* LOGOUT BUTTON */}
-        <button onClick={handleLogout} className="flex items-center gap-3 p-3 rounded-lg hover:bg-red-600 transition">
+       <div className="border-t ">
+         <button onClick={handleLogout} className="flex items-center gap-3 p-3 rounded-lg w-full hover:bg-red-600 transition ">
           <AiOutlineLogout size={20} />
           Logout
         </button>
+       </div>
       </aside>
 
 

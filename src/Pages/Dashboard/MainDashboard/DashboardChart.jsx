@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import {
   PieChart,
   Pie,
@@ -9,12 +9,15 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { AuthContext } from '../../../Context/AuthContext';
+import Loading from '../../../Components/Loading/Loading';
 
 const DashboardChart = () => {
 
 
 const COLORS = ["#EF4444", "#3B82F6"];
 const axiosSecure= useAxiosSecure()
+const {loading}=use(AuthContext)
 
 const [value,setValue]=useState([])
 const [donorvalue,setDonorvalue]=useState([])
@@ -45,9 +48,13 @@ const newvalue = donorvalue.length
   { name: "Donors", value: newvalue },
 ];
 
+if(loading){
+  return <Loading></Loading>
+}
+
   return (
-        <div className="bg-gradient-to-br from-white/70 to-gray-100 rounded-3xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+        <div className=" rounded-3xl shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
+      <h2 className="text-2xl font-bold mb-6 ">
         Donors vs Blood Requests
       </h2>
 
